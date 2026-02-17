@@ -112,7 +112,6 @@ document.addEventListener('DOMContentLoaded', function () {
   var chatbotMessages = document.getElementById('chatbotMessages');
   var chatbotForm = document.getElementById('chatbotForm');
   var chatbotInput = document.getElementById('chatbotInput');
-  var chatbotSuggestions = document.getElementById('chatbotSuggestions');
 
   // Toggle chatbot open/close
   function toggleChatbot() {
@@ -173,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
     },
     {
       keywords: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening'],
-      answer: 'Hello! Welcome to Friends of CROSS. I\'m here to help answer any questions you might have about our charity, how to donate, our research, or how to get involved. What would you like to know?'
+      answer: 'Hello! I\'m Hope, your Friends of CROSS assistant. I\'m here to help answer any questions you might have about our charity, how to donate, our research, or how to get involved. What would you like to know?'
     },
     {
       keywords: ['thank', 'thanks', 'cheers'],
@@ -249,10 +248,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add user message
     addMessage(text, 'user');
 
-    // Hide suggestions after first interaction
-    if (chatbotSuggestions) {
-      chatbotSuggestions.style.display = 'none';
-    }
 
     // Show typing indicator
     showTyping();
@@ -273,12 +268,6 @@ document.addEventListener('DOMContentLoaded', function () {
     sendMessage(text);
   });
 
-  // Suggestion buttons
-  chatbotSuggestions.querySelectorAll('.suggestion-btn').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      sendMessage(btn.getAttribute('data-question'));
-    });
-  });
 
   // ---- Smooth scroll for anchor links (fallback) ----
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {

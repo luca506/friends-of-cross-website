@@ -1363,30 +1363,6 @@ h1, h2, h3, h4 {
   border-bottom-right-radius: 4px;
 }
 
-.chatbot-suggestions {
-  padding: 0.5rem 1.25rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  border-top: 1px solid var(--color-border);
-}
-
-.suggestion-btn {
-  padding: 0.4rem 0.75rem;
-  border: 1px solid var(--color-border);
-  background: var(--color-white);
-  border-radius: var(--radius-xl);
-  font-size: 0.75rem;
-  color: var(--color-primary);
-  cursor: pointer;
-  transition: all var(--transition);
-  font-family: var(--font-body);
-}
-
-.suggestion-btn:hover {
-  background: rgba(27,91,166,0.06);
-  border-color: var(--color-primary);
-}
 
 .chatbot-input {
   display: flex;
