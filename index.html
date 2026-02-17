@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Friends of CROSS — Supporting Cancer Research in Ireland</title>
+  <meta name="description" content="Friends of CROSS raises vital funds to support cancer research, state-of-the-art equipment, and cancer care across Ireland.">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo">
+        <span class="logo-friends">Friends of</span>
+        <span class="logo-cross">CROSS</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#impact">Our Impact</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#get-involved">Get Involved</a></li>
+        <li><a href="#team">Our Team</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#donate" class="nav-donate-btn">Donate</a>
+    </div>
+  </nav>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero" id="home">
+    <div class="hero-overlay"></div>
+    <div class="hero-image-placeholder">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+      <span>Hero Image Placeholder (1920 x 800)</span>
+    </div>
+    <div class="hero-content">
+      <h1>Supporting the Future of <span class="highlight">Cancer Research</span> in Ireland</h1>
+      <p>Friends of CROSS raises vital funds to support cancer research, state-of-the-art equipment, and improved patient care across Ireland.</p>
+      <div class="hero-buttons">
+        <a href="#donate" class="btn btn-primary">Donate Now</a>
+        <a href="#about" class="btn btn-secondary">Learn More</a>
+      </div>
+    </div>
+
+    <!-- Donation Widget - Fixed Top Right -->
+    <div class="donation-widget" id="donationWidget">
+      <div class="donation-widget-header">
+        <span class="donation-widget-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </span>
+        <span>Quick Donate</span>
+      </div>
+      <div class="donation-widget-body">
+        <div class="donation-amounts">
+          <button class="amount-btn" data-amount="25">&euro;25</button>
+          <button class="amount-btn active" data-amount="50">&euro;50</button>
+          <button class="amount-btn" data-amount="100">&euro;100</button>
+          <button class="amount-btn" data-amount="250">&euro;250</button>
+        </div>
+        <div class="custom-amount">
+          <span class="currency-symbol">&euro;</span>
+          <input type="number" id="customAmount" placeholder="Other amount" min="1">
+        </div>
+        <a href="#donate" class="btn btn-primary btn-donate-widget">Donate Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT SECTION ========== -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Who We Are</span>
+        <h2>About Our Work</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="lead">Through the work of Friends of CROSS, we raise funds to support Cancer Research and improve patient care across cancer care systems, including the <strong>Trinity St James Cancer Institute</strong> and <strong>St. James's Hospital</strong>.</p>
+          <p>Our fundraising activities support the education and training of high-quality medical students and allow for investments in state-of-the-art laboratory equipment to drive translational research projects aimed at the prevention, understanding, and treatment of various forms of cancer.</p>
+          <p class="charity-number">Friends of CROSS is a registered charity in Ireland &mdash; <strong>Charity Number 15364</strong></p>
+        </div>
+        <div class="about-image">
+          <div class="image-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+            <span>Research Photo Placeholder</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Friends of CROSS Subsection -->
+      <div class="friends-subsection" id="friends-of-cross">
+        <h3>Friends of CROSS</h3>
+        <p>The Friends of CROSS Board are a group of individuals who commit their time to creating and supporting initiatives to raise money for our work.</p>
+        <div class="board-preview">
+          <div class="board-member-name">James O'Connor <span>(Chair)</span></div>
+          <div class="board-member-name">John Reynolds <span>(Trinity &amp; St James' Rep)</span></div>
+          <div class="board-member-name">Conor Headon</div>
+          <div class="board-member-name">Sean Headon</div>
+          <div class="board-member-name">Patrick Headon</div>
+          <div class="board-member-name">Tom Conachy</div>
+          <div class="board-member-name">Ben English</div>
+          <div class="board-member-name">Philip Smith</div>
+        </div>
+        <a href="#team" class="btn btn-outline">Meet the Team</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== IMPACT SECTION ========== -->
+  <section class="section impact" id="impact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Making a Difference</span>
+        <h2>Our Impact</h2>
+        <div class="section-divider"></div>
+      </div>
+      <p class="section-intro">Through our fundraising activities, CROSS has raised funds to support key equipment in the Trinity College Dublin Dept. of Surgery at St. James's Hospital. This equipment is essential for the ongoing research of the department.</p>
+
+      <div class="impact-stat">
+        <div class="stat-number">&euro;1M+</div>
+        <div class="stat-label">Raised to purchase cutting-edge cancer research equipment</div>
+      </div>
+
+      <h3 class="equipment-heading">Equipment We've Funded</h3>
+      <div class="equipment-grid">
+        <div class="equipment-card">
+          <div class="equipment-image">
+            <div class="image-placeholder small">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+              <span>Equipment Photo</span>
+            </div>
+          </div>
+          <div class="equipment-info">
+            <h4>Flow Cytometer</h4>
+            <p>Advanced cell analysis technology enabling researchers to identify and sort individual cells, critical for understanding cancer cell behaviour and developing targeted therapies.</p>
+          </div>
+        </div>
+        <div class="equipment-card">
+          <div class="equipment-image">
+            <div class="image-placeholder small">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+              <span>Equipment Photo</span>
+            </div>
+          </div>
+          <div class="equipment-info">
+            <h4>Tissue Microarrayer</h4>
+            <p>Precision instrument that allows researchers to analyse multiple tissue samples simultaneously, accelerating the pace of cancer research and biomarker discovery.</p>
+          </div>
+        </div>
+        <div class="equipment-card">
+          <div class="equipment-image">
+            <div class="image-placeholder small">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+              <span>Equipment Photo</span>
+            </div>
+          </div>
+          <div class="equipment-info">
+            <h4>Cryostat</h4>
+            <p>Essential laboratory equipment used to prepare thin tissue sections for microscopic examination, enabling detailed study of cancer tissue samples at extremely low temperatures.</p>
+          </div>
+        </div>
+        <div class="equipment-card">
+          <div class="equipment-image">
+            <div class="image-placeholder small">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+              <span>Equipment Photo</span>
+            </div>
+          </div>
+          <div class="equipment-info">
+            <h4>PCR Thermal Cycler</h4>
+            <p>Core molecular biology equipment used to amplify DNA segments, fundamental to genetic research into cancer mutations and the development of personalised medicine approaches.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EVENTS SECTION ========== -->
+  <section class="section events" id="events">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Join Us</span>
+        <h2>Fundraising &amp; Events</h2>
+        <div class="section-divider"></div>
+      </div>
+      <p class="section-intro">Friends of CROSS run a range of inclusive and engaging events throughout the year, offering everyone an opportunity to support our mission.</p>
+
+      <div class="events-grid">
+        <div class="event-card">
+          <div class="event-date">
+            <span class="event-month">MAR</span>
+            <span class="event-day">7</span>
+          </div>
+          <div class="event-info">
+            <h4>Charity Boxing Night</h4>
+            <p>An exciting evening of white-collar boxing in support of cancer research. All skill levels welcome.</p>
+          </div>
+        </div>
+        <div class="event-card">
+          <div class="event-date">
+            <span class="event-month">MAR</span>
+            <span class="event-day">14</span>
+          </div>
+          <div class="event-info">
+            <h4>Charity Boxing Night</h4>
+            <p>A second night of white-collar boxing action. Come along and show your support for CROSS.</p>
+          </div>
+        </div>
+        <div class="event-card featured">
+          <div class="event-date">
+            <span class="event-month">SUM</span>
+            <span class="event-day">'24</span>
+          </div>
+          <div class="event-info">
+            <h4>CROSS Golf Classic</h4>
+            <p>Our flagship summer golf event. A fantastic day on the course for a great cause. Teams and sponsorship available.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="events-cta">
+        <p>There are also ample opportunities to arrange your own events to support our work.</p>
+        <a href="#get-involved" class="btn btn-primary">Get Involved</a>
+      </div>
+
+      <div class="event-gallery">
+        <div class="image-placeholder gallery-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <span>Fundraising Photo 1</span>
+        </div>
+        <div class="image-placeholder gallery-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <span>Fundraising Photo 2</span>
+        </div>
+        <div class="image-placeholder gallery-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <span>Fundraising Photo 3</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GET INVOLVED SECTION ========== -->
+  <section class="section get-involved" id="get-involved">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Make a Difference</span>
+        <h2>Get Involved</h2>
+        <div class="section-divider"></div>
+      </div>
+      <p class="section-intro">There are always opportunities to get involved in our work. Here's how you can help:</p>
+
+      <div class="involved-grid">
+        <div class="involved-card">
+          <div class="involved-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </div>
+          <h4>Donations</h4>
+          <p>Contribute financial support through one-time donations or regular contributions. Every euro makes a difference.</p>
+          <a href="#donate" class="card-link">Donate Now &rarr;</a>
+        </div>
+        <div class="involved-card">
+          <div class="involved-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h4>Volunteering</h4>
+          <p>Offer your time and skills to volunteer for events, fundraising campaigns, or other activities organised by CROSS.</p>
+          <a href="#contact" class="card-link">Contact Us &rarr;</a>
+        </div>
+        <div class="involved-card">
+          <div class="involved-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h4>Participate in Events</h4>
+          <p>Join fundraising events and other initiatives organised by Friends of CROSS to actively support our work.</p>
+          <a href="#events" class="card-link">View Events &rarr;</a>
+        </div>
+        <div class="involved-card">
+          <div class="involved-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          </div>
+          <h4>Spread Awareness</h4>
+          <p>Raise awareness about the work of CROSS and our mission and activities within your community or on social media.</p>
+        </div>
+        <div class="involved-card">
+          <div class="involved-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <h4>Corporate Sponsorship</h4>
+          <p>We are always open to working with corporates across our events &mdash; a great opportunity to bring teams together and support a worthwhile cause.</p>
+          <a href="#contact" class="card-link">Partner With Us &rarr;</a>
+        </div>
+      </div>
+
+      <div class="involved-cta">
+        <p>To learn more, please fill out the <a href="#contact">Contact Us</a> form and a member of the team will get in touch.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DONATE SECTION ========== -->
+  <section class="section donate" id="donate">
+    <div class="container">
+      <div class="section-header light">
+        <span class="section-tag">Support Our Work</span>
+        <h2>Donate</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="donate-content">
+        <div class="donate-text">
+          <p class="lead">Thank you for supporting the work of CROSS. Your support makes a crucial difference to the future of cancer research.</p>
+          <p>Please use the secure Stripe link below to process your donation. All contributions go directly towards funding cancer research equipment and supporting the work of the Trinity College Dublin Dept. of Surgery at St. James's Hospital.</p>
+          <div class="donate-amounts-section">
+            <h4>Choose an amount:</h4>
+            <div class="donate-amount-buttons">
+              <button class="donate-amount-btn" data-amount="25">&euro;25</button>
+              <button class="donate-amount-btn" data-amount="50">&euro;50</button>
+              <button class="donate-amount-btn active" data-amount="100">&euro;100</button>
+              <button class="donate-amount-btn" data-amount="250">&euro;250</button>
+              <button class="donate-amount-btn" data-amount="500">&euro;500</button>
+            </div>
+            <div class="donate-custom">
+              <span class="currency-symbol">&euro;</span>
+              <input type="number" id="donateCustomAmount" placeholder="Enter custom amount" min="1">
+            </div>
+          </div>
+          <!-- Stripe Placeholder Button -->
+          <a href="#" class="btn btn-primary btn-large donate-stripe-btn" id="stripeBtn" onclick="event.preventDefault(); alert('Stripe integration coming soon. Thank you for your interest in donating!');">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            Donate Securely via Stripe
+          </a>
+          <p class="donate-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Your payment is processed securely via Stripe. Friends of CROSS is a registered charity (No. 15364).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TEAM SECTION ========== -->
+  <section class="section team" id="team">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Our People</span>
+        <h2>Board Members</h2>
+        <div class="section-divider"></div>
+      </div>
+      <p class="section-intro">The Friends of CROSS Board are a group of dedicated individuals who commit their time to creating and supporting initiatives to raise money for cancer research.</p>
+
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-photo">
+            <div class="image-placeholder avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+          <h4>James O'Connor</h4>
+          <span class="team-role">Chair</span>
+        </div>
+        <div class="team-card">
+          <div class="team-photo">
+            <div class="image-placeholder avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+          <h4>John Reynolds</h4>
+          <span class="team-role">Trinity &amp; St James' Rep</span>
+        </div>
+        <div class="team-card">
+          <div class="team-photo">
+            <div class="image-placeholder avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+          <h4>Conor Headon</h4>
+          <span class="team-role">Board Member</span>
+        </div>
+        <div class="team-card">
+          <div class="team-photo">
+            <div class="image-placeholder avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+          <h4>Sean Headon</h4>
+          <span class="team-role">Board Member</span>
+        </div>
+        <div class="team-card">
+          <div class="team-photo">
+            <div class="image-placeholder avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+          <h4>Patrick Headon</h4>
+          <span class="team-role">Board Member</span>
+        </div>
+        <div class="team-card">
+          <div class="team-photo">
+            <div class="image-placeholder avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+          <h4>Tom Conachy</h4>
+          <span class="team-role">Board Member</span>
+        </div>
+        <div class="team-card">
+          <div class="team-photo">
+            <div class="image-placeholder avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+          <h4>Ben English</h4>
+          <span class="team-role">Board Member</span>
+        </div>
+        <div class="team-card">
+          <div class="team-photo">
+            <div class="image-placeholder avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+          <h4>Philip Smith</h4>
+          <span class="team-role">Board Member</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT SECTION ========== -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Reach Out</span>
+        <h2>Contact Us</h2>
+        <div class="section-divider"></div>
+      </div>
+      <p class="section-intro">Have a question or want to get involved? We'd love to hear from you. Fill out the form below and a member of our team will be in touch.</p>
+
+      <div class="contact-grid">
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label for="contactName">Full Name</label>
+            <input type="text" id="contactName" name="name" required placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="contactEmail">Email Address</label>
+            <input type="email" id="contactEmail" name="email" required placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label for="contactSubject">Subject</label>
+            <select id="contactSubject" name="subject">
+              <option value="general">General Enquiry</option>
+              <option value="donate">Donations</option>
+              <option value="volunteer">Volunteering</option>
+              <option value="events">Events</option>
+              <option value="corporate">Corporate Sponsorship</option>
+            </select>
+          </div>
+          <div class="form-group full-width">
+            <label for="contactMessage">Message</label>
+            <textarea id="contactMessage" name="message" rows="5" required placeholder="How can we help?"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+
+        <div class="contact-info">
+          <div class="contact-info-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <h4>Address</h4>
+              <p>Trinity College Dublin<br>Dept. of Surgery<br>St. James's Hospital<br>Dublin 8, Ireland</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <div>
+              <h4>Email</h4>
+              <p>info@crosscharity.ie</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <div>
+              <h4>Charity Number</h4>
+              <p>15364</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <div class="footer-logo">
+            <span class="logo-friends">Friends of</span>
+            <span class="logo-cross">CROSS</span>
+          </div>
+          <p>Raising vital funds to support cancer research and improved patient care across Ireland.</p>
+          <p class="footer-charity">Registered Charity No. 15364</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#impact">Our Impact</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#get-involved">Get Involved</a></li>
+            <li><a href="#donate">Donate</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <p>Trinity College Dublin<br>Dept. of Surgery<br>St. James's Hospital<br>Dublin 8, Ireland</p>
+          <p>info@crosscharity.ie</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Friends of CROSS. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== CHATBOT WIDGET ========== -->
+  <div class="chatbot" id="chatbot">
+    <button class="chatbot-toggle" id="chatbotToggle" aria-label="Open chat">
+      <svg class="chatbot-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <svg class="chatbot-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <span class="chatbot-badge">1</span>
+    </button>
+    <div class="chatbot-window" id="chatbotWindow">
+      <div class="chatbot-header">
+        <div class="chatbot-header-info">
+          <div class="chatbot-avatar">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div>
+            <h4>CROSS Assistant</h4>
+            <span class="chatbot-status">Online</span>
+          </div>
+        </div>
+        <button class="chatbot-close" id="chatbotClose" aria-label="Close chat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="chatbot-messages" id="chatbotMessages">
+        <div class="chat-message bot">
+          <div class="chat-bubble">
+            Hi there! I'm the CROSS Assistant. I can help you with questions about our charity, how to donate, our research, and how to get involved. What would you like to know?
+          </div>
+        </div>
+      </div>
+      <div class="chatbot-suggestions" id="chatbotSuggestions">
+        <button class="suggestion-btn" data-question="What does CROSS do?">What does CROSS do?</button>
+        <button class="suggestion-btn" data-question="How can I donate?">How can I donate?</button>
+        <button class="suggestion-btn" data-question="Where do donations go?">Where do donations go?</button>
+        <button class="suggestion-btn" data-question="What research do you fund?">What research do you fund?</button>
+        <button class="suggestion-btn" data-question="How can I volunteer?">How can I volunteer?</button>
+      </div>
+      <form class="chatbot-input" id="chatbotForm">
+        <input type="text" id="chatbotInput" placeholder="Type your question..." autocomplete="off">
+        <button type="submit" aria-label="Send message">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
