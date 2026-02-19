@@ -4,26 +4,26 @@
 
 /* ---- CSS Custom Properties ---- */
 :root {
-  /* Primary palette — professional, trustworthy blue */
-  --color-primary: #1B5BA6;       /* Strong blue — trust, professionalism */
-  --color-primary-dark: #143F7A;
-  --color-primary-light: #3B82D6;
-  --color-accent: #3AA0E8;        /* Sky blue — approachable, CTA */
-  --color-accent-dark: #2882CC;
-  --color-accent-light: #5AB8F4;
+  /* Primary palette — warm, trustworthy teal-navy */
+  --color-primary: #1A4A7A;       /* Warm deep navy — trust with warmth */
+  --color-primary-dark: #13365C;
+  --color-primary-light: #2A6BAF;
+  --color-accent: #E07A5F;        /* Warm coral — inviting, human CTA */
+  --color-accent-dark: #C4654D;
+  --color-accent-light: #E99680;
 
-  /* Neutrals */
-  --color-bg: #FAFAF8;
-  --color-bg-alt: #F2F0EB;
-  --color-bg-dark: #1A1D23;
+  /* Neutrals — warm off-whites and creams */
+  --color-bg: #FAF7F2;
+  --color-bg-alt: #F5EFE6;
+  --color-bg-dark: #1E2128;
   --color-text: #2D3038;
   --color-text-light: #6B7080;
   --color-text-muted: #9CA3AF;
   --color-white: #FFFFFF;
-  --color-border: #E5E7EB;
+  --color-border: #E8E2D9;
 
   /* Donate section */
-  --color-donate-bg: #1B5BA6;
+  --color-donate-bg: #1A4A7A;
 
   /* Typography */
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -38,17 +38,17 @@
   --transition: 0.3s ease;
   --transition-slow: 0.5s ease;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
-  --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
-  --shadow-xl: 0 16px 48px rgba(0,0,0,0.15);
+  /* Shadows — warm tones */
+  --shadow-sm: 0 1px 3px rgba(30,20,10,0.06);
+  --shadow-md: 0 4px 12px rgba(30,20,10,0.08);
+  --shadow-lg: 0 8px 30px rgba(30,20,10,0.1);
+  --shadow-xl: 0 16px 48px rgba(30,20,10,0.12);
 
   /* Border radius */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 26px;
 }
 
 /* ---- Reset & Base ---- */
@@ -162,7 +162,7 @@ h1, h2, h3, h4 {
   font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 600;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xl);
   border: 2px solid transparent;
   cursor: pointer;
   transition: all var(--transition);
@@ -280,7 +280,7 @@ h1, h2, h3, h4 {
 .nav-links li a:hover,
 .nav-links li a.active {
   color: var(--color-primary);
-  background: rgba(27,91,166,0.06);
+  background: rgba(26,74,122,0.06);
 }
 
 .nav-donate-btn {
@@ -327,13 +327,13 @@ h1, h2, h3, h4 {
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: linear-gradient(135deg, #1A1D23 0%, #2D3038 100%);
+  background: linear-gradient(135deg, #1E2128 0%, #2D3038 100%);
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(27,91,166,0.85) 0%, rgba(26,29,35,0.7) 100%);
+  background: linear-gradient(135deg, rgba(26,74,122,0.88) 0%, rgba(30,33,40,0.7) 100%);
   z-index: 1;
 }
 
@@ -453,9 +453,9 @@ h1, h2, h3, h4 {
 
 .amount-btn:hover,
 .amount-btn.active {
-  border-color: var(--color-primary);
-  background: rgba(27,91,166,0.06);
-  color: var(--color-primary);
+  border-color: var(--color-accent);
+  background: rgba(224,122,95,0.08);
+  color: var(--color-accent-dark);
 }
 
 .custom-amount {
@@ -709,7 +709,7 @@ h1, h2, h3, h4 {
 
 .event-card.featured {
   border-color: var(--color-accent);
-  background: linear-gradient(135deg, rgba(58,160,232,0.05), rgba(58,160,232,0.02));
+  background: linear-gradient(135deg, rgba(224,122,95,0.06), rgba(224,122,95,0.02));
 }
 
 .event-date {
@@ -798,10 +798,10 @@ h1, h2, h3, h4 {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(27,91,166,0.08);
+  background: rgba(224,122,95,0.1);
   border-radius: var(--radius-sm);
   margin-bottom: 1.25rem;
-  color: var(--color-primary);
+  color: var(--color-accent);
 }
 
 .involved-icon svg {
@@ -902,7 +902,7 @@ h1, h2, h3, h4 {
 .donate-amount-btn:hover,
 .donate-amount-btn.active {
   border-color: var(--color-accent);
-  background: rgba(58,160,232,0.15);
+  background: rgba(224,122,95,0.15);
   color: var(--color-accent-light);
 }
 
@@ -1185,7 +1185,7 @@ h1, h2, h3, h4 {
 }
 
 .chatbot-toggle:hover {
-  background: var(--color-primary-dark);
+  background: var(--color-accent-dark);
   transform: scale(1.05);
 }
 

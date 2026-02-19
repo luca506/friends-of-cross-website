@@ -10,9 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function handleScroll() {
     const scrollY = window.scrollY;
-    // Add scrolled class to navbar
     navbar.classList.toggle('scrolled', scrollY > 50);
-    // Show donation widget after scrolling past hero
     if (donationWidget) {
       donationWidget.classList.toggle('visible', scrollY > 600);
     }
@@ -31,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function () {
       navLinks.classList.toggle('open');
     });
 
-    // Close mobile nav on link click
     navLinks.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         navToggle.classList.remove('open');
@@ -103,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ========================================
-  // CHATBOT
+  // HOPE CHATBOT — Full Rewrite
   // ========================================
 
   var chatbot = document.getElementById('chatbot');
@@ -113,7 +110,12 @@ document.addEventListener('DOMContentLoaded', function () {
   var chatbotForm = document.getElementById('chatbotForm');
   var chatbotInput = document.getElementById('chatbotInput');
 
-  // Toggle chatbot open/close
+  // ---- Session state ----
+  var sessionContext = { lastIntent: null };
+  var sessionHistory = {};  // { intentKey: timesAnswered }
+  var responseIndex = {};   // { intentKey: nextVariantIndex }
+
+  // ---- Toggle chatbot ----
   function toggleChatbot() {
     chatbot.classList.toggle('open');
     if (chatbot.classList.contains('open')) {
@@ -124,94 +126,451 @@ document.addEventListener('DOMContentLoaded', function () {
   chatbotToggle.addEventListener('click', toggleChatbot);
   chatbotClose.addEventListener('click', toggleChatbot);
 
-  // ---- Chatbot Knowledge Base ----
-  var chatbotKB = [
-    {
-      keywords: ['what', 'cross', 'do', 'about', 'mission', 'who', 'are you', 'what is'],
-      answer: 'Friends of CROSS (Cancer Research Oncology Surgery Support) raises vital funds to support cancer research and improve patient care across Ireland. We work closely with the Trinity St James Cancer Institute and St. James\'s Hospital, funding state-of-the-art laboratory equipment and supporting the education and training of medical students. Our work focuses on translational research projects aimed at the prevention, understanding, and treatment of various forms of cancer. We are a registered charity in Ireland (Charity Number 15364).'
-    },
-    {
-      keywords: ['donate', 'donation', 'give', 'contribute', 'money', 'pay', 'support financially'],
-      answer: 'Thank you for your interest in donating! You can donate directly through our website — just click the "Donate Now" button or scroll to the Donate section. If you want to donate, you can do it directly through me! We accept donations via our secure Stripe payment link. You can make a one-time donation or set up regular contributions. Every euro makes a crucial difference to the future of cancer research. <a href="#donate" style="color: #3AA0E8; font-weight: 600;">Click here to donate now</a>.'
-    },
-    {
-      keywords: ['where', 'donations go', 'money go', 'funds go', 'spent', 'use'],
-      answer: 'Your donations go directly towards supporting cancer research at Trinity College Dublin\'s Dept. of Surgery at St. James\'s Hospital. Specifically, funds are used to purchase cutting-edge cancer research equipment (we\'ve raised over \u20AC1 million to date), support the education and training of medical students, and drive translational research projects aimed at preventing and treating various forms of cancer. Equipment funded includes flow cytometers, tissue microarrayers, cryostats, and PCR thermal cyclers.'
-    },
-    {
-      keywords: ['research', 'fund', 'projects', 'equipment', 'science', 'study'],
-      answer: 'CROSS funds translational research projects at the Trinity College Dublin Dept. of Surgery at St. James\'s Hospital. To date, over \u20AC1 million has been raised to purchase cutting-edge equipment including: Flow Cytometers (for cell analysis), Tissue Microarrayers (for tissue sample analysis), Cryostats (for tissue section preparation), and PCR Thermal Cyclers (for DNA research). This equipment is essential for ongoing research into the prevention, understanding, and treatment of cancer.'
-    },
-    {
-      keywords: ['volunteer', 'help', 'involved', 'get involved', 'participate', 'join'],
-      answer: 'There are many ways to get involved with CROSS! You can: volunteer your time and skills for events and campaigns, participate in fundraising events like our Charity Boxing Nights and Golf Classic, spread awareness on social media and in your community, or explore corporate sponsorship opportunities. To learn more, fill out our <a href="#contact" style="color: #3AA0E8; font-weight: 600;">Contact Us form</a> and a team member will be in touch!'
-    },
-    {
-      keywords: ['event', 'events', 'boxing', 'golf', 'fundrais'],
-      answer: 'Friends of CROSS runs exciting events throughout the year! Key events include our Charity Boxing Nights (great fun for all skill levels) and the CROSS Golf Classic in the summer. We also welcome people who want to organise their own events in support of our work. Check the <a href="#events" style="color: #3AA0E8; font-weight: 600;">Events section</a> for more details or <a href="#contact" style="color: #3AA0E8; font-weight: 600;">get in touch</a> to learn about upcoming events.'
-    },
-    {
-      keywords: ['board', 'team', 'member', 'who runs', 'people', 'staff'],
-      answer: 'The Friends of CROSS Board includes: James O\'Connor (Chair), John Reynolds (Trinity & St James\' Rep), Conor Headon, Sean Headon, Patrick Headon, Tom Conachy, Ben English, and Philip Smith. They are a dedicated group of individuals who commit their time to creating and supporting initiatives to raise money for cancer research.'
-    },
-    {
-      keywords: ['contact', 'reach', 'email', 'address', 'phone', 'location', 'where'],
-      answer: 'You can reach Friends of CROSS at: <br><strong>Address:</strong> Trinity College Dublin, Dept. of Surgery, St. James\'s Hospital, Dublin 8, Ireland<br><strong>Email:</strong> info@crosscharity.ie<br>You can also fill out our <a href="#contact" style="color: #3AA0E8; font-weight: 600;">Contact Us form</a> and a member of the team will get back to you.'
-    },
-    {
-      keywords: ['charity', 'number', 'registered', 'legitimate', 'legal', 'tax'],
-      answer: 'Yes, Friends of CROSS is a fully registered charity in Ireland. Our Charity Number is 15364. All donations go directly towards supporting cancer research at Trinity College Dublin and St. James\'s Hospital.'
-    },
-    {
-      keywords: ['corporate', 'sponsor', 'partnership', 'company', 'business'],
-      answer: 'We are always open to working with corporate partners across our events. Corporate sponsorship with CROSS is a great opportunity to bring teams together while supporting a worthwhile cause. Please <a href="#contact" style="color: #3AA0E8; font-weight: 600;">contact us</a> to discuss partnership opportunities.'
-    },
-    {
-      keywords: ['stripe', 'payment', 'secure', 'safe'],
-      answer: 'We use Stripe for secure payment processing. Stripe is one of the world\'s most trusted payment platforms, ensuring your donation details are safe and secure. If you want to donate, you can do it directly through me! <a href="#donate" style="color: #3AA0E8; font-weight: 600;">Click here to go to our donation page</a>.'
-    },
-    {
-      keywords: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening'],
-      answer: 'Hello! I\'m Hope, your Friends of CROSS assistant. I\'m here to help answer any questions you might have about our charity, how to donate, our research, or how to get involved. What would you like to know?'
-    },
-    {
-      keywords: ['thank', 'thanks', 'cheers'],
-      answer: 'You\'re very welcome! If you have any other questions, feel free to ask. And thank you for your interest in supporting cancer research in Ireland!'
-    },
-    {
-      keywords: ['trinity', 'james', 'hospital', 'institute'],
-      answer: 'Friends of CROSS works closely with the Trinity St James Cancer Institute and St. James\'s Hospital in Dublin. Our funding supports the Department of Surgery at Trinity College Dublin, based at St. James\'s Hospital, where cutting-edge cancer research takes place. The equipment we fund is essential for the department\'s ongoing translational research programmes.'
+  // ---- Auto-open after 4 seconds ----
+  setTimeout(function () {
+    if (!chatbot.classList.contains('open')) {
+      chatbot.classList.add('open');
     }
+  }, 4000);
+
+  // ========================================
+  // LAYER 1 — Input Normalisation
+  // ========================================
+
+  var contractions = {
+    "don't": 'do not', "doesn't": 'does not', "didn't": 'did not',
+    "can't": 'can not', "couldn't": 'could not', "won't": 'will not',
+    "wouldn't": 'would not', "shouldn't": 'should not', "isn't": 'is not',
+    "aren't": 'are not', "wasn't": 'was not', "weren't": 'were not',
+    "haven't": 'have not', "hasn't": 'has not', "hadn't": 'had not',
+    "i'm": 'i am', "i've": 'i have', "i'll": 'i will', "i'd": 'i would',
+    "you're": 'you are', "you've": 'you have', "you'll": 'you will', "you'd": 'you would',
+    "we're": 'we are', "we've": 'we have', "we'll": 'we will', "we'd": 'we would',
+    "they're": 'they are', "they've": 'they have', "they'll": 'they will', "they'd": 'they would',
+    "he's": 'he is', "she's": 'she is', "it's": 'it is',
+    "that's": 'that is', "there's": 'there is', "here's": 'here is',
+    "what's": 'what is', "who's": 'who is', "where's": 'where is',
+    "how's": 'how is', "let's": 'let us'
+  };
+
+  var fillerPhrases = [
+    'can you', 'could you', 'tell me', 'i want to know', 'i would like to know',
+    'do you know', 'would you', 'i am wondering', 'i was wondering',
+    'may i ask', 'let me know', 'i am curious'
   ];
 
-  // Find the best matching answer
-  function findAnswer(question) {
-    var q = question.toLowerCase().trim();
-    var bestMatch = null;
-    var bestScore = 0;
+  var fillerWords = ['um', 'uh', 'like', 'just', 'please', 'actually', 'basically', 'literally', 'well', 'so', 'okay', 'ok', 'right'];
 
-    for (var i = 0; i < chatbotKB.length; i++) {
-      var entry = chatbotKB[i];
-      var score = 0;
-      for (var j = 0; j < entry.keywords.length; j++) {
-        if (q.indexOf(entry.keywords[j]) !== -1) {
-          score += entry.keywords[j].length; // Longer keyword matches score higher
-        }
-      }
-      if (score > bestScore) {
-        bestScore = score;
-        bestMatch = entry;
-      }
-    }
-
-    if (bestScore > 0 && bestMatch) {
-      return bestMatch.answer;
-    }
-
-    return 'I\'m not sure about that specific question, but I\'d love to help! You can ask me about what CROSS does, how to donate, where donations go, our research, events, volunteering, or our team. For more detailed queries, please <a href="#contact" style="color: #3AA0E8; font-weight: 600;">contact our team directly</a>.';
+  function normalise(text) {
+    var s = text.toLowerCase().trim();
+    // Strip punctuation except apostrophes (for contractions)
+    s = s.replace(/[^\w\s']/g, ' ');
+    // Expand contractions
+    Object.keys(contractions).forEach(function (key) {
+      s = s.replace(new RegExp('\\b' + key.replace("'", "\\'") + '\\b', 'g'), contractions[key]);
+    });
+    // Remove filler phrases (longer first)
+    fillerPhrases.forEach(function (phrase) {
+      s = s.replace(new RegExp('\\b' + phrase + '\\b', 'g'), ' ');
+    });
+    // Remove filler words
+    fillerWords.forEach(function (word) {
+      s = s.replace(new RegExp('\\b' + word + '\\b', 'g'), ' ');
+    });
+    // Collapse whitespace
+    return s.replace(/\s+/g, ' ').trim();
   }
 
-  // Add a message to the chat window
+  // ========================================
+  // KNOWLEDGE BASE — organised by intent
+  // ========================================
+
+  var chatbotKB = {
+
+    greeting: {
+      triggers: {
+        exact: ['hello', 'hi', 'hey', 'hiya', 'howdy', 'good morning', 'good afternoon', 'good evening', 'greetings'],
+        partial: ['hello', 'hi there'],
+        keywords: ['hello', 'hi', 'hey', 'morning', 'afternoon', 'evening']
+      },
+      responses: [
+        'Hi there! I\'m Hope, your friendly guide to Friends of CROSS. I\'d love to help you learn about our cancer research work, upcoming events, or how you can get involved. What\'s on your mind?',
+        'Hello! Welcome \u2014 I\'m Hope. Whether you\'re curious about our charity, want to donate, or just want to chat about what we do, I\'m here for you. What would you like to know?',
+        'Hey! Great to see you here. I\'m Hope, and I know a thing or two about Friends of CROSS. Ask me anything about our research, events, donations, or how to get involved!'
+      ],
+      followUp: 'Is there something specific I can help you with? I can tell you about our research, events, how to donate, or how to volunteer \u2014 whatever interests you most!'
+    },
+
+    thanks: {
+      triggers: {
+        exact: ['thank you', 'thanks', 'cheers', 'ta', 'appreciate it', 'thank you so much'],
+        partial: ['thank', 'cheers', 'appreciate'],
+        keywords: ['thank', 'thanks', 'cheers', 'appreciate', 'grateful']
+      },
+      responses: [
+        'You\'re so welcome! If anything else comes to mind, I\'m right here. And thank you for your interest in supporting cancer research in Ireland \u2014 it really does mean the world.',
+        'Happy to help! Don\'t hesitate to ask if you think of anything else. Your support and curiosity about our work genuinely makes a difference.',
+        'Not at all \u2014 that\'s what I\'m here for! If you\'d like to learn more or get involved, I\'m always just a message away.'
+      ],
+      followUp: 'Is there anything else I can help with? I\'m always happy to chat about what CROSS is up to!'
+    },
+
+    about: {
+      triggers: {
+        exact: ['what is cross', 'who are you', 'tell me about cross', 'what do you do', 'what does cross do', 'about cross', 'what is friends of cross'],
+        partial: ['what is', 'who are', 'about', 'mission', 'purpose', 'charity', 'explain', 'overview'],
+        keywords: ['cross', 'about', 'mission', 'purpose', 'charity', 'what', 'who', 'organisation', 'organization']
+      },
+      responses: [
+        'CROSS stands for <strong>Cancer Research of the Oesophagus and Stomach</strong>, and we\'re a registered Irish charity. Our mission is to support cancer research and improve patient care at the Trinity Translational Medicine Institute, Trinity College Dublin, and St. James\'s Hospital. Friends of CROSS is our fundraising arm \u2014 a voluntary group that raises cancer awareness across Ireland and funds research through fun, inclusive community events. The best part? We have <strong>zero administrative costs</strong>, so every cent goes directly to equipment and research.',
+        'Friends of CROSS is a voluntary fundraising group that supports cancer research at Trinity College Dublin and St. James\'s Hospital. We were founded in 2004 by Conor Headon and Ronan Murphy to support the pioneering research of Professor John Reynolds. Since then, we\'ve raised <strong>over \u20AC1 million</strong> for life-saving equipment and translational research. We\'re a registered charity (No. 15364) with no admin costs \u2014 everything goes straight to the science.',
+        'At its heart, CROSS is about people coming together to fight cancer through research. We fund cutting-edge equipment at the Trinity Translational Medicine Institute, support young cancer researchers, and raise awareness through community events. Founded in 2004 and run entirely by volunteers, we\'re proof that a dedicated group of people can make a massive difference. Over \u20AC1 million raised and counting!'
+      ],
+      followUp: 'Would you like to know more about a specific aspect? I can tell you about our research, the equipment we\'ve funded, our history, or the team behind it all.'
+    },
+
+    donate: {
+      triggers: {
+        exact: ['how can i donate', 'i want to donate', 'make a donation', 'how to donate', 'where can i donate'],
+        partial: ['donat', 'give', 'contribut', 'payment', 'money', 'fund', 'support financial', 'stripe', 'pay', 'gift', 'one off', 'one-off', 'monthly', 'regular giving'],
+        keywords: ['donate', 'donation', 'give', 'contribute', 'money', 'pay', 'support', 'fund', 'stripe', 'payment', 'gift', 'monthly']
+      },
+      responses: [
+        'Thank you so much for thinking about donating \u2014 that\'s wonderful! You can donate directly through our website using our secure Stripe payment link. We have suggested amounts of \u20AC25, \u20AC50, \u20AC100, \u20AC250, or \u20AC500, but any amount is incredibly appreciated. Every euro goes <strong>directly</strong> to cancer research equipment and training. <a href="#donate" style="color: var(--color-accent); font-weight: 600;">Click here to donate now</a>.',
+        'That\'s so generous of you! Donating is easy \u2014 just scroll down to our Donate section or <a href="#donate" style="color: var(--color-accent); font-weight: 600;">click here</a>. We process everything securely through Stripe, and you can choose a preset amount or enter your own. The amazing thing about CROSS is that we have no admin costs, so 100% of your donation funds research.',
+        'I love that you\'re thinking about supporting our work! You can make a one-time donation right here on the website via our secure Stripe link. Whether it\'s \u20AC25 or \u20AC500, every contribution makes a real impact on cancer research. <a href="#donate" style="color: var(--color-accent); font-weight: 600;">Head to the donation section</a> to get started.'
+      ],
+      followUp: 'If you have any questions about the donation process or how your money is used, I\'m happy to explain. We use Stripe for secure payment processing, and every cent goes to equipment and research at Trinity and St. James\'s.'
+    },
+
+    research: {
+      triggers: {
+        exact: ['what research do you fund', 'tell me about the research', 'what science do you support', 'cancer research'],
+        partial: ['research', 'science', 'lab', 'laborator', 'stud', 'cancer', 'equipment', 'machine', 'cryostat', 'pcr', 'cytometer', 'microarray', 'translational', 'clinical', 'finding', 'cure', 'seahorse', 'gelcount', 'gene scanner', 'quantstudio'],
+        keywords: ['research', 'science', 'lab', 'study', 'cancer', 'equipment', 'machine', 'translational', 'clinical', 'cure', 'treatment', 'prevention']
+      },
+      responses: [
+        'Our research is where the real magic happens! CROSS funds translational research at the Trinity Translational Medicine Institute, focusing on understanding and treating cancers \u2014 particularly oesophageal, breast, colon, and lung cancer. We\'ve funded incredible equipment including a <strong>Seahorse XFe24 Analyzer</strong> (measures live cell metabolism), a <strong>QuantStudio 5 Real-Time PCR System</strong> (analyses DNA changes), a <strong>Flow Cytometer</strong>, <strong>Tissue Microarrayer</strong>, <strong>Cryostat</strong>, and <strong>GelCount</strong>. Over <strong>60 researchers</strong> across multiple disciplines use this equipment daily.',
+        'CROSS supports cutting-edge cancer research at Trinity College Dublin and St. James\'s Hospital. The team studies everything from treatment resistance in gastrointestinal cancer to tumour immunology and the role of obesity in cancer development. We\'ve invested in essential equipment like PCR systems for DNA analysis, flow cytometers for cell sorting, and the Seahorse Analyzer which can measure the metabolism of live cancer cells in real time. This equipment is used by over 60 researchers working on multiple cancer types.',
+        'The research we fund is genuinely world-class. Ireland and the UK have the <strong>highest rates of oesophageal cancer</strong> worldwide, so this work is critically important. Our funded equipment at the Trinity Translational Medicine Institute supports research into cancer metabolism, immunotherapy, radiation resistance, and biomarker discovery. Key pieces include the Seahorse Analyzer, QuantStudio PCR system, Flow Cytometer, Tissue Microarrayer, Cryostat, and GelCount \u2014 all used by 60+ researchers every day.'
+      ],
+      followUp: 'Would you like to know more about a specific piece of equipment, the types of cancer being studied, or the research team? I can also tell you about some of the breakthroughs that have come from this work.'
+    },
+
+    events: {
+      triggers: {
+        exact: ['what events do you run', 'upcoming events', 'tell me about your events', 'any events coming up'],
+        partial: ['event', 'boxing', 'golf', 'classic', 'fundrais', 'night', 'upcoming', 'calendar', 'participat', 'join', 'attend', 'ticket', 'cycle', 'carol', 'concert', 'christmas'],
+        keywords: ['event', 'boxing', 'golf', 'fundraiser', 'night', 'calendar', 'ticket', 'cycle', 'concert', 'attend', 'participate']
+      },
+      responses: [
+        'We run some brilliant events throughout the year! Our main ones include the <strong>Charity Boxing Nights</strong> (white-collar boxing \u2014 great fun for all skill levels), the <strong>CROSS Golf Classic</strong> in the summer, and our <strong>Christmas Carol Concert</strong> at the beautiful Trinity College Chapel. We also have a proud history of the <strong>CROSS Rugby Legends Cycle</strong>, which has seen rugby legends cycling across Ireland for charity. Check the <a href="#events" style="color: var(--color-accent); font-weight: 600;">Events section</a> for the latest!',
+        'There\'s always something happening with Friends of CROSS! Our <strong>Charity Boxing Nights</strong> are hugely popular \u2014 organised through Headon Boxing Academy, they\'ve raised over \u20AC70,000 alone. We also host the <strong>CROSS Golf Classic</strong> each summer and a gorgeous <strong>Christmas Carol Concert</strong> at Trinity Chapel (last year raised \u20AC14,000!). Plus, there are always opportunities to organise your own fundraiser. <a href="#events" style="color: var(--color-accent); font-weight: 600;">See what\'s coming up</a>.',
+        'Our events are a huge part of what makes CROSS special \u2014 they bring people together for a great cause while having a fantastic time. From <strong>boxing nights</strong> and <strong>golf classics</strong> to <strong>carol concerts</strong> and the legendary <strong>Rugby Legends Cycle</strong> (which has raised hundreds of thousands over the years), there\'s something for everyone. <a href="#events" style="color: var(--color-accent); font-weight: 600;">Take a look at our upcoming events</a>.'
+      ],
+      followUp: 'Want to know more about a specific event, or are you thinking about attending or organising one yourself? I\'d love to point you in the right direction!'
+    },
+
+    volunteer: {
+      triggers: {
+        exact: ['how can i volunteer', 'i want to volunteer', 'can i help out', 'how do i get involved', 'how to get involved'],
+        partial: ['volunteer', 'help out', 'give time', 'get involved', 'assist', 'contribute time', 'sign up', 'lend a hand'],
+        keywords: ['volunteer', 'help', 'involved', 'participate', 'join', 'assist', 'sign']
+      },
+      responses: [
+        'We\'d absolutely love to have you involved! There are lots of ways to help: <strong>volunteer</strong> at our events (boxing nights, golf classics, carol concerts), help with <strong>fundraising campaigns</strong>, <strong>spread awareness</strong> on social media and in your community, or even <strong>organise your own event</strong> in support of CROSS. Just fill out our <a href="#contact" style="color: var(--color-accent); font-weight: 600;">contact form</a> and someone from the team will be in touch to chat about how you can get involved.',
+        'That\'s brilliant \u2014 thank you! Whether you can spare a few hours for an event or want to take on something bigger, we\'d love your help. You could assist with our Boxing Nights, Golf Classic, or Carol Concert, help with social media, organise a community fundraiser, or simply spread the word. <a href="#contact" style="color: var(--color-accent); font-weight: 600;">Drop us a message</a> and we\'ll find the perfect fit for you.',
+        'Getting involved with CROSS is one of the best ways to make a tangible difference for cancer research in Ireland. Our volunteers are the backbone of everything we do \u2014 from running events to raising awareness. If you\'re interested, <a href="#contact" style="color: var(--color-accent); font-weight: 600;">reach out through our contact form</a> and a team member will chat with you about what suits your interests and availability.'
+      ],
+      followUp: 'If you\'d like, I can tell you more about specific volunteer opportunities, or you can contact the team directly at info@crosscharity.ie. They\'re always happy to have a chat!'
+    },
+
+    impact: {
+      triggers: {
+        exact: ['how much have you raised', 'what impact have you had', 'what have you achieved', 'what difference have you made'],
+        partial: ['impact', 'raised', 'million', 'how much raised', 'difference', 'achievement', 'result', 'success', 'accomplish', 'total'],
+        keywords: ['impact', 'raised', 'million', 'difference', 'achievement', 'success', 'accomplish', 'result']
+      },
+      responses: [
+        'I\'m so proud to share this! Over the past 12+ years, Friends of CROSS has raised <strong>over \u20AC1 million</strong> for cancer research. This has funded life-changing equipment used by <strong>60+ researchers</strong> across multiple cancer types at Trinity College Dublin and St. James\'s Hospital. Our Boxing Nights alone have raised \u20AC70,000, our Christmas Carol Concert raised \u20AC14,000, and the legendary Rugby Legends Cycle has generated hundreds of thousands. Every euro has gone directly to research \u2014 zero admin costs.',
+        'The impact has been incredible. <strong>Over \u20AC1 million raised</strong>, funding equipment that\'s used daily by more than <strong>60 researchers</strong> studying cancers of the oesophagus, breast, colon, lung, and more. We\'ve funded a Seahorse Analyzer (\u20AC105,000 alone!), PCR systems, flow cytometers, and other critical research tools. Ireland has the highest rate of oesophageal cancer in the world, so this work is genuinely saving lives.',
+        'In a nutshell: <strong>\u20AC1 million+ raised</strong>, <strong>8 major pieces of equipment</strong> funded, <strong>60+ researchers</strong> supported, and <strong>zero admin costs</strong>. From the very first Mizen-to-Malin cycle in 2012 that raised \u20AC52,000, to Uniphar\'s Unity for Hope campaign contributing \u20AC110,000, every single effort adds up. The equipment we\'ve funded is being used right now in labs at Trinity to advance our understanding of cancer.'
+      ],
+      followUp: 'Would you like to know more about specific milestones, the equipment we\'ve funded, or how individual events have contributed? Happy to go deeper!'
+    },
+
+    board: {
+      triggers: {
+        exact: ['who is on the board', 'who runs cross', 'tell me about the team', 'board members', 'who are the board members'],
+        partial: ['board', 'who runs', 'team', 'member', 'chair', 'leadership', 'patron', 'wallace'],
+        keywords: ['board', 'team', 'member', 'chair', 'james', 'john', 'sean', 'conor', 'patrick', 'tom', 'ben', 'philip', 'leadership', 'wallace', 'reynolds', 'headon', 'patron']
+      },
+      responses: [
+        'The Friends of CROSS Board is a wonderful group of dedicated volunteers. They are: <strong>James O\'Connor</strong> (Chair), <strong>Professor John Reynolds</strong> (Trinity & St James\' Representative \u2014 he\'s also the Professor of Clinical Surgery who co-founded CROSS), <strong>Conor Headon</strong> (co-founder of CROSS), <strong>Sean Headon</strong>, <strong>Patrick Headon</strong>, <strong>Tom Conachy</strong>, <strong>Ben English</strong>, and <strong>Philip Smith</strong>. Our patron is <strong>Paul Wallace</strong>, the former Irish rugby international and British & Irish Lion.',
+        'Our board is led by <strong>James O\'Connor</strong> as Chair, with <strong>Professor John Reynolds</strong> representing Trinity and St. James\'s. The Headon family are deeply involved \u2014 <strong>Conor</strong> co-founded CROSS back in 2004, while <strong>Sean</strong> and <strong>Patrick</strong> also serve on the board (Sean and Patrick also run Headon Boxing Academy, which has been an incredible fundraising partner). Rounding out the team are <strong>Tom Conachy</strong>, <strong>Ben English</strong>, and <strong>Philip Smith</strong>. And our patron is rugby legend <strong>Paul Wallace</strong>!',
+        'We\'re fortunate to have an amazing team driving Friends of CROSS. Chair <strong>James O\'Connor</strong> leads the board alongside <strong>Professor John Reynolds</strong> (a world-renowned surgical oncologist), <strong>Conor, Sean, and Patrick Headon</strong>, <strong>Tom Conachy</strong>, <strong>Ben English</strong>, and <strong>Philip Smith</strong>. CROSS was co-founded in 2004 by Conor Headon and Ronan Murphy, and our patron since 2011 is <strong>Paul Wallace</strong>, one of three Wallace brothers in the Guinness Book of Records for all playing for the British & Irish Lions.'
+      ],
+      followUp: 'Would you like to know more about the research team at Trinity, or perhaps about our patron Paul Wallace and the incredible cycling fundraisers he\'s led?'
+    },
+
+    contact: {
+      triggers: {
+        exact: ['how can i contact you', 'contact details', 'get in touch', 'email address', 'where are you located'],
+        partial: ['contact', 'reach', 'email', 'phone', 'address', 'get in touch', 'speak to', 'talk to', 'find you', 'located', 'where are'],
+        keywords: ['contact', 'reach', 'email', 'phone', 'address', 'touch', 'speak', 'talk', 'location']
+      },
+      responses: [
+        'I\'d love to connect you with the team! Here are our details:<br><br><strong>Email:</strong> info@crosscharity.ie<br><strong>Address:</strong> Trinity College Dublin, Dept. of Surgery, St. James\'s Hospital, Dublin 8, Ireland<br><strong>Website:</strong> crosscharity.ie<br><br>You can also fill out our <a href="#contact" style="color: var(--color-accent); font-weight: 600;">contact form</a> right here on the site and someone will get back to you promptly.',
+        'Here\'s how to reach us:<br><br><strong>Email:</strong> info@crosscharity.ie<br><strong>Address:</strong> Dept. of Surgery, Trinity College Dublin at St. James\'s Hospital, Dublin 8<br><br>Or simply use the <a href="#contact" style="color: var(--color-accent); font-weight: 600;">contact form</a> on this page \u2014 it goes straight to the team. They\'re a lovely bunch and always happy to chat!',
+        'The quickest way to get in touch is by emailing <strong>info@crosscharity.ie</strong> or using our <a href="#contact" style="color: var(--color-accent); font-weight: 600;">online contact form</a>. Our base is at Trinity College Dublin, Dept. of Surgery, St. James\'s Hospital, Dublin 8, Ireland. Whether you have a question about donating, events, or volunteering, the team would love to hear from you.'
+      ],
+      followUp: 'Is there something specific you\'d like to ask the team about? I might be able to help right here, or I can make sure your message gets to the right person.'
+    },
+
+    hospital: {
+      triggers: {
+        exact: ['tell me about st james', 'trinity partnership', 'where is the research done', 'cancer institute'],
+        partial: ['st james', 'trinity', 'hospital', 'institute', 'cancer centre', 'cancer center', 'tsjci', 'dublin', 'partnership', 'ttmi'],
+        keywords: ['trinity', 'james', 'hospital', 'institute', 'dublin', 'partnership', 'cancer']
+      },
+      responses: [
+        'CROSS is deeply embedded in Ireland\'s leading cancer research institutions. We work within the <strong>Trinity Translational Medicine Institute (TTMI)</strong> at <strong>Trinity College Dublin</strong>, with all our funded equipment based at <strong>St. James\'s Hospital</strong> \u2014 Ireland\'s largest acute teaching hospital. The <strong>Trinity St James\'s Cancer Institute (TSJCI)</strong> is Ireland\'s first OECI-accredited comprehensive cancer centre, with over 180 scientists working on cancer projects. It\'s an incredible environment for our research.',
+        'Our research home is at the <strong>Trinity Translational Medicine Institute</strong>, part of Trinity College Dublin\'s Department of Surgery at <strong>St. James\'s Hospital</strong> in Dublin 8. This is where all the equipment we\'ve funded lives and where 60+ researchers use it daily. The <strong>Trinity St James\'s Cancer Institute</strong> is the first in Ireland to receive OECI accreditation as a comprehensive cancer centre \u2014 meaning it meets the highest European standards for cancer care and research.',
+        'The partnership between CROSS and Trinity/St. James\'s is what makes our work so impactful. St. James\'s Hospital is Ireland\'s largest teaching hospital, and the <strong>Trinity St James\'s Cancer Institute</strong> brings together clinical expertise and world-class research. CROSS also collaborates with the <strong>AllCaN (All-Ireland Cancer Network)</strong>, linking universities across Ireland and Northern Ireland to tackle oesophageal cancer together.'
+      ],
+      followUp: 'Want to know more about the specific research happening at these institutions, or about the Trinity St James\'s Cancer Institute\'s accreditation?'
+    },
+
+    corporate: {
+      triggers: {
+        exact: ['corporate sponsorship', 'can my company sponsor', 'business partnership', 'corporate partnership'],
+        partial: ['corporate', 'sponsor', 'company', 'business', 'partnership', 'brand', 'team building', 'organisation', 'organization', 'uniphar'],
+        keywords: ['corporate', 'sponsor', 'company', 'business', 'partnership', 'brand', 'organisation']
+      },
+      responses: [
+        'We\'d love to partner with your organisation! Corporate sponsorship with CROSS is a fantastic opportunity \u2014 you can support life-saving research while bringing your team together for memorable events. Past partners include <strong>Uniphar PLC</strong> (whose Unity for Hope campaign raised \u20AC110,000 with matched funding) and <strong>Viviscal</strong>. Opportunities range from sponsoring our Boxing Nights and Golf Classic to bespoke partnership arrangements. <a href="#contact" style="color: var(--color-accent); font-weight: 600;">Get in touch</a> to explore the possibilities!',
+        'Corporate partnerships are incredibly valuable to CROSS. <strong>Uniphar PLC</strong> has been a fantastic partner \u2014 their staff campaign raised significant funds which the company matched, contributing over \u20AC110,000. We offer sponsorship opportunities across our events (Boxing Nights, Golf Classic, Carol Concert) and are always open to creative collaborations. It\'s a wonderful way to align your brand with a meaningful cause. <a href="#contact" style="color: var(--color-accent); font-weight: 600;">Let\'s chat about how we can work together</a>.',
+        'Absolutely! We\'re always delighted to work with businesses who want to make a difference. Whether it\'s event sponsorship, team fundraising challenges, or something completely new, we\'ll make it work. Companies like Uniphar and Viviscal have been incredible supporters over the years. <a href="#contact" style="color: var(--color-accent); font-weight: 600;">Contact us</a> and we\'ll tailor something that works for both of us.'
+      ],
+      followUp: 'Would you like to hear about specific sponsorship packages, or shall I connect you with the team to discuss a custom partnership?'
+    },
+
+    awareness: {
+      triggers: {
+        exact: ['how can i spread the word', 'share on social media', 'how to raise awareness'],
+        partial: ['share', 'social media', 'spread', 'awareness', 'tell people', 'promote', 'post', 'instagram', 'linkedin', 'twitter', 'facebook'],
+        keywords: ['share', 'social', 'spread', 'awareness', 'promote', 'post', 'instagram', 'linkedin', 'media']
+      },
+      responses: [
+        'Spreading the word is one of the most powerful things you can do! You can follow us on social media (find us as <strong>@crosscharity_ie</strong> on X/Twitter), share our posts, tell friends and family about our work, or even share this website. If you\'re part of a school, club, or workplace, you could also organise a small awareness event. Every conversation about cancer research matters!',
+        'Thank you for wanting to help spread the word \u2014 awareness is incredibly important! Here\'s what you can do: follow <strong>@crosscharity_ie</strong> on social media and share our posts, talk to friends and colleagues about our mission, share the crosscharity.ie website, or even organise a small fundraiser in your community or workplace. Word of mouth has been one of our most powerful tools over the years.',
+        'Awareness is everything! Simply talking about CROSS in your community makes a huge difference. You can follow us at <strong>@crosscharity_ie</strong> on social media, share our event details with your network, or even organise something locally \u2014 a bake sale, a quiz night, anything goes! Some of our most successful fundraising has come from schools and community groups who got creative.'
+      ],
+      followUp: 'Would you like our social media links, or are you thinking about organising something specific? We can help with ideas and support!'
+    },
+
+    history: {
+      triggers: {
+        exact: ['when was cross founded', 'history of cross', 'how did cross start', 'who founded cross'],
+        partial: ['founded', 'history', 'start', 'began', 'origin', 'founder', '2004', 'headon', 'murphy'],
+        keywords: ['founded', 'history', 'start', 'began', 'origin', 'founder', 'year', 'first']
+      },
+      responses: [
+        'CROSS has a wonderful story! It was <strong>founded in 2004</strong> by businessmen <strong>Conor Headon</strong> and <strong>Ronan Murphy</strong> to support the cancer research of <strong>Professor John Reynolds</strong> at Trinity College Dublin. The first patron was <strong>Felipe Contepomi</strong>, the Argentine rugby legend who\'s also a qualified doctor! In 2011, former Irish rugby international <strong>Paul Wallace</strong> became patron and proposed the first Mizen-to-Malin charity cycle in 2012, which raised \u20AC52,000 and kicked off an incredible tradition.',
+        'It all began in <strong>2004</strong> when <strong>Conor Headon</strong> and <strong>Ronan Murphy</strong> wanted to support the pioneering cancer research of Professor John Reynolds at Trinity. Rugby legend <strong>Felipe Contepomi</strong> (who is also a medical doctor!) became the first patron. When Contepomi moved to France in 2009, <strong>Paul Wallace</strong> stepped in as patron in 2011 and launched the famous <strong>Rugby Legends Cycle</strong> in 2012. From that first \u20AC52,000 raised, the charity has grown to over \u20AC1 million!',
+        'CROSS has come a long way since <strong>Conor Headon and Ronan Murphy</strong> founded it in <strong>2004</strong>. What started as rugby-themed fundraiser lunches with patron Felipe Contepomi evolved into the legendary <strong>Rugby Legends Cycle</strong> under Paul Wallace\'s leadership from 2012. Over the years, the cycle has taken various routes \u2014 Mizen to Malin, the Wild Atlantic Way, Ireland\'s Ancient East \u2014 and the charity has expanded into boxing nights, golf classics, and carol concerts. It\'s been an incredible journey.'
+      ],
+      followUp: 'Want to hear more about a specific era, the Rugby Legends Cycle, or how the charity has evolved over the years?'
+    },
+
+    payment: {
+      triggers: {
+        exact: ['is it safe to donate', 'is payment secure', 'how is payment processed', 'stripe payment'],
+        partial: ['stripe', 'payment', 'secure', 'safe', 'credit card', 'debit card', 'security'],
+        keywords: ['stripe', 'payment', 'secure', 'safe', 'card', 'security', 'process']
+      },
+      responses: [
+        'Absolutely \u2014 your security is our top priority! We use <strong>Stripe</strong> for all payment processing, which is one of the world\'s most trusted and secure platforms. Your card details are encrypted and never stored on our servers. Friends of CROSS is also a registered charity (No. 15364), so you can donate with complete confidence. <a href="#donate" style="color: var(--color-accent); font-weight: 600;">Ready to donate?</a>',
+        'Great question! We process all donations through <strong>Stripe</strong>, which handles payments for companies like Amazon and Google, so your details are in very safe hands. Everything is encrypted end-to-end, and we never see or store your card information. As a registered Irish charity (No. 15364), transparency and trust are central to everything we do.',
+        'Your donation is processed securely through <strong>Stripe</strong> \u2014 a world-leading payment platform trusted by millions of businesses globally. Your personal and financial data is fully encrypted and protected. And because we have zero administrative costs, you can rest assured that every cent of your donation goes directly to cancer research.'
+      ],
+      followUp: 'Would you like to go ahead and make a donation, or do you have any other questions about the process?'
+    },
+
+    oesophageal: {
+      triggers: {
+        exact: ['oesophageal cancer', 'stomach cancer', 'barrett oesophagus', 'baretts'],
+        partial: ['oesophag', 'esophag', 'stomach', 'barrett', 'gullet', 'gastric', 'upper gi', 'gastrointestin'],
+        keywords: ['oesophageal', 'esophageal', 'stomach', 'barrett', 'gastric', 'gullet']
+      },
+      responses: [
+        'Oesophageal cancer is very close to our hearts at CROSS. Ireland and the UK have the <strong>highest incidence of oesophageal adenocarcinoma worldwide</strong>, with about 500 new cases in Ireland each year. The 5-year survival rate is only 24% \u2014 meaning just 1 in 4 patients survive. That\'s exactly why our research is so critical. Our team studies treatment resistance, cancer metabolism, immunotherapy approaches, and Barrett\'s oesophagus (a pre-cancerous condition). We also manage the Barrett\'s Oesophagus Biobank at St. James\'s Hospital.',
+        'This is the core of what CROSS was founded to address. <strong>Oesophageal and stomach cancer</strong> have devastating survival rates \u2014 only about 24% of patients in Ireland survive five years after diagnosis. Ireland has one of the highest rates in the world. Our researchers are working on understanding why some tumours resist treatment, developing new approaches to radiation therapy, and studying Barrett\'s oesophagus, which is a key precursor to oesophageal cancer.',
+        'It\'s one of the most challenging cancers, and CROSS is on the front line. With around <strong>500 new cases annually</strong> in Ireland and a 5-year survival rate of just 24%, there\'s an urgent need for better treatments. Our funded research covers cancer metabolism, immunotherapy combinations, radiation resistance, and the Barrett\'s Oesophagus Biobank \u2014 a collection of patient samples that\'s invaluable for translational research.'
+      ],
+      followUp: 'Would you like to know more about our specific research projects, the Barrett\'s Biobank, or the statistics around oesophageal cancer in Ireland?'
+    }
+  };
+
+  // ========================================
+  // LAYER 2 & 3 — Intent Classification + Scored Matching
+  // ========================================
+
+  var SCORE_EXACT = 3;
+  var SCORE_PARTIAL = 2;
+  var SCORE_KEYWORD = 1;
+  var MIN_THRESHOLD = 2;
+
+  function classifyIntent(cleaned) {
+    var bestIntent = null;
+    var bestScore = 0;
+    var words = cleaned.split(' ');
+
+    var intentKeys = Object.keys(chatbotKB);
+    for (var i = 0; i < intentKeys.length; i++) {
+      var key = intentKeys[i];
+      var triggers = chatbotKB[key].triggers;
+      var score = 0;
+
+      // Exact phrase matches
+      if (triggers.exact) {
+        for (var e = 0; e < triggers.exact.length; e++) {
+          if (cleaned === triggers.exact[e] || cleaned.indexOf(triggers.exact[e]) !== -1) {
+            score += SCORE_EXACT;
+          }
+        }
+      }
+
+      // Partial (stem) matches
+      if (triggers.partial) {
+        for (var p = 0; p < triggers.partial.length; p++) {
+          if (cleaned.indexOf(triggers.partial[p]) !== -1) {
+            score += SCORE_PARTIAL;
+          }
+        }
+      }
+
+      // Single keyword matches
+      if (triggers.keywords) {
+        for (var k = 0; k < triggers.keywords.length; k++) {
+          for (var w = 0; w < words.length; w++) {
+            if (words[w] === triggers.keywords[k] || words[w].indexOf(triggers.keywords[k]) !== -1) {
+              score += SCORE_KEYWORD;
+              break; // only count each keyword once
+            }
+          }
+        }
+      }
+
+      if (score > bestScore) {
+        bestScore = score;
+        bestIntent = key;
+      }
+    }
+
+    if (bestScore >= MIN_THRESHOLD && bestIntent) {
+      return bestIntent;
+    }
+    return null;
+  }
+
+  // ========================================
+  // LAYER 4 — Contextual Follow-up Detection
+  // ========================================
+
+  var followUpTriggers = ['it', 'that', 'this', 'they', 'more', 'go on', 'tell me more', 'how', 'why', 'really', 'yes', 'yeah', 'yep', 'sure', 'absolutely', 'definitely', 'continue', 'what else', 'and', 'also', 'interesting', 'wow', 'cool', 'great', 'nice', 'elaborate', 'expand', 'details', 'specifically'];
+
+  function isFollowUp(cleaned) {
+    var wordCount = cleaned.split(' ').length;
+    if (wordCount > 4) return false;
+    for (var i = 0; i < followUpTriggers.length; i++) {
+      if (cleaned === followUpTriggers[i] || cleaned.indexOf(followUpTriggers[i]) !== -1) {
+        return true;
+      }
+    }
+    // Very short message (1-2 words) with question mark intent
+    if (wordCount <= 2) return true;
+    return false;
+  }
+
+  // ========================================
+  // LAYER 5 — Conversational Continuity
+  // ========================================
+
+  function getResponse(intentKey) {
+    var entry = chatbotKB[intentKey];
+    if (!entry) return null;
+
+    // Track how many times this intent has been answered
+    if (!sessionHistory[intentKey]) sessionHistory[intentKey] = 0;
+    if (!responseIndex[intentKey]) responseIndex[intentKey] = 0;
+
+    // If answered twice already, give a gentle nudge
+    if (sessionHistory[intentKey] >= 2) {
+      sessionHistory[intentKey]++;
+      return 'Happy to keep talking about this \u2014 is there a specific aspect I can help clarify? Or if you\'d like, I can tell you about something different like our <a href="#events" style="color: var(--color-accent); font-weight: 600;">events</a>, <a href="#donate" style="color: var(--color-accent); font-weight: 600;">how to donate</a>, or <a href="#contact" style="color: var(--color-accent); font-weight: 600;">how to get in touch</a>.';
+    }
+
+    // Rotate through response variants
+    var idx = responseIndex[intentKey] % entry.responses.length;
+    responseIndex[intentKey]++;
+    sessionHistory[intentKey]++;
+
+    return entry.responses[idx];
+  }
+
+  function getFollowUpResponse(intentKey) {
+    var entry = chatbotKB[intentKey];
+    if (!entry || !entry.followUp) return null;
+    return entry.followUp;
+  }
+
+  // ========================================
+  // Unknown Fallback Variants
+  // ========================================
+
+  var unknownResponses = [
+    'That\'s a great question \u2014 I want to make sure you get the right answer rather than guess! Please reach out to the team directly at <strong>info@crosscharity.ie</strong> and they\'ll get back to you promptly.',
+    'Hmm, I\'m not 100% certain about that one, and I\'d rather connect you with someone who can give you a definitive answer. Drop a line to <strong>info@crosscharity.ie</strong> or use our <a href="#contact" style="color: var(--color-accent); font-weight: 600;">contact form</a> \u2014 the team are wonderful and always happy to help!',
+    'I appreciate the question! That\'s a bit outside what I can confidently answer, so let me point you to the team who\'ll know for sure. You can email <strong>info@crosscharity.ie</strong> or <a href="#contact" style="color: var(--color-accent); font-weight: 600;">send a message through our contact form</a>.'
+  ];
+  var unknownIndex = 0;
+
+  function getUnknownResponse() {
+    var resp = unknownResponses[unknownIndex % unknownResponses.length];
+    unknownIndex++;
+    return resp;
+  }
+
+  // ========================================
+  // Main Answer Function
+  // ========================================
+
+  function findAnswer(text) {
+    var cleaned = normalise(text);
+
+    // Layer 4: Check for follow-up
+    if (sessionContext.lastIntent && isFollowUp(cleaned)) {
+      var followUp = getFollowUpResponse(sessionContext.lastIntent);
+      if (followUp) return followUp;
+    }
+
+    // Layer 2 & 3: Classify intent with scoring
+    var intent = classifyIntent(cleaned);
+
+    if (intent) {
+      sessionContext.lastIntent = intent;
+      return getResponse(intent);
+    }
+
+    // Unknown fallback
+    return getUnknownResponse();
+  }
+
+  // ========================================
+  // Chat UI Functions
+  // ========================================
+
   function addMessage(text, sender) {
     var messageDiv = document.createElement('div');
     messageDiv.className = 'chat-message ' + sender;
@@ -223,7 +582,6 @@ document.addEventListener('DOMContentLoaded', function () {
     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
   }
 
-  // Show typing indicator
   function showTyping() {
     var messageDiv = document.createElement('div');
     messageDiv.className = 'chat-message bot';
@@ -241,23 +599,22 @@ document.addEventListener('DOMContentLoaded', function () {
     if (indicator) indicator.remove();
   }
 
-  // Handle sending a message
   function sendMessage(text) {
     if (!text.trim()) return;
 
-    // Add user message
     addMessage(text, 'user');
-
-
-    // Show typing indicator
     showTyping();
 
-    // Simulate response delay
+    // Vary delay: 1000–2000ms, longer for longer responses
+    var answer = findAnswer(text);
+    var baseDelay = 1000 + Math.random() * 600;
+    var lengthBonus = Math.min(answer.length / 3, 400);
+    var delay = baseDelay + lengthBonus;
+
     setTimeout(function () {
       removeTyping();
-      var answer = findAnswer(text);
       addMessage(answer, 'bot');
-    }, 800 + Math.random() * 600);
+    }, delay);
   }
 
   // Form submission
@@ -267,7 +624,6 @@ document.addEventListener('DOMContentLoaded', function () {
     chatbotInput.value = '';
     sendMessage(text);
   });
-
 
   // ---- Smooth scroll for anchor links (fallback) ----
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
@@ -304,7 +660,6 @@ document.addEventListener('DOMContentLoaded', function () {
     revealObserver.observe(el);
   });
 
-  // Add revealed styles via a style element
   var style = document.createElement('style');
   style.textContent = '.revealed { opacity: 1 !important; transform: translateY(0) !important; }';
   document.head.appendChild(style);
