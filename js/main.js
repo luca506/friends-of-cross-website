@@ -299,6 +299,20 @@ document.addEventListener('DOMContentLoaded', function () {
       followUp: 'Would you like to know more about specific milestones, the equipment we\'ve funded, or how individual events have contributed? Happy to go deeper!'
     },
 
+    contact_board: {
+      triggers: {
+        exact: ['contact a board member', 'email a board member', 'reach a board member', 'speak to a board member', 'talk to a board member', 'get in touch with the board', 'contact the team', 'email the team', 'reach the team', 'speak to the team', 'talk to the team', 'contact the chair'],
+        partial: ['contact board', 'contact member', 'contact chair', 'contact team', 'email board', 'email member', 'email chair', 'email team', 'reach board', 'reach member', 'reach chair', 'reach team', 'speak to board', 'speak to member', 'speak to chair', 'speak to team', 'talk to board', 'talk to member', 'talk to chair', 'talk to team', 'get in touch board', 'get in touch member', 'get in touch team', 'contact james', 'contact john', 'contact sean', 'contact conor', 'contact patrick', 'contact tom', 'contact ben', 'contact philip'],
+        keywords: []
+      },
+      responses: [
+        'The best way to get in touch with the Friends of CROSS team, including board members, is to reach out directly at <strong>info@crosscharity.ie</strong> \u2014 they\'ll make sure your message gets to the right person. You can also use our <a href="#contact" style="color: var(--color-accent); font-weight: 600;">contact form</a> on this page.',
+        'If you\'d like to reach a specific board member, the easiest route is to email <strong>info@crosscharity.ie</strong> and let them know who you\'d like to speak with. The team will pass your message along promptly. You can also use our <a href="#contact" style="color: var(--color-accent); font-weight: 600;">contact form</a>.',
+        'To get in touch with the board or any member of the CROSS team, drop a message to <strong>info@crosscharity.ie</strong> \u2014 they\'re very responsive and will connect you with the right person. Our <a href="#contact" style="color: var(--color-accent); font-weight: 600;">contact form</a> works too!'
+      ],
+      followUp: 'If you let me know what your query is about, I might be able to help directly \u2014 otherwise the team at info@crosscharity.ie will be happy to assist.'
+    },
+
     board: {
       triggers: {
         exact: ['who is on the board', 'who runs cross', 'tell me about the team', 'board members', 'who are the board members'],
@@ -306,11 +320,11 @@ document.addEventListener('DOMContentLoaded', function () {
         keywords: ['board', 'team', 'member', 'chair', 'james', 'john', 'sean', 'conor', 'patrick', 'tom', 'ben', 'philip', 'leadership', 'wallace', 'reynolds', 'headon', 'patron']
       },
       responses: [
-        'The Friends of CROSS Board is a wonderful group of dedicated volunteers. They are: <strong>James O\'Connor</strong> (Chair), <strong>Professor John Reynolds</strong> (Trinity & St James\' Representative \u2014 he\'s also the Professor of Clinical Surgery who co-founded CROSS), <strong>Conor Headon</strong> (co-founder of CROSS), <strong>Sean Headon</strong>, <strong>Patrick Headon</strong>, <strong>Tom Conachy</strong>, <strong>Ben English</strong>, and <strong>Philip Smith</strong>. Our patron is <strong>Paul Wallace</strong>, the former Irish rugby international and British & Irish Lion.',
-        'Our board is led by <strong>James O\'Connor</strong> as Chair, with <strong>Professor John Reynolds</strong> representing Trinity and St. James\'s. The Headon family are deeply involved \u2014 <strong>Conor</strong> co-founded CROSS back in 2004, while <strong>Sean</strong> and <strong>Patrick</strong> also serve on the board (Sean and Patrick also run Headon Boxing Academy, which has been an incredible fundraising partner). Rounding out the team are <strong>Tom Conachy</strong>, <strong>Ben English</strong>, and <strong>Philip Smith</strong>. And our patron is rugby legend <strong>Paul Wallace</strong>!',
-        'We\'re fortunate to have an amazing team driving Friends of CROSS. Chair <strong>James O\'Connor</strong> leads the board alongside <strong>Professor John Reynolds</strong> (a world-renowned surgical oncologist), <strong>Conor, Sean, and Patrick Headon</strong>, <strong>Tom Conachy</strong>, <strong>Ben English</strong>, and <strong>Philip Smith</strong>. CROSS was co-founded in 2004 by Conor Headon and Ronan Murphy, and our patron since 2011 is <strong>Paul Wallace</strong>, one of three Wallace brothers in the Guinness Book of Records for all playing for the British & Irish Lions.'
+        'The Friends of CROSS Board is a wonderful group of dedicated volunteers. They are: <strong>James O\'Connor</strong> (Chair), <strong>Professor John Reynolds</strong> (Trinity & St James\' Representative \u2014 he\'s also the Professor of Clinical Surgery who co-founded CROSS), <strong>Conor Headon</strong> (co-founder of CROSS), <strong>Sean Headon</strong>, <strong>Patrick Headon</strong>, <strong>Tom Conachy</strong>, <strong>Ben English</strong>, and <strong>Philip Smith</strong>. Our patron is <strong>Paul Wallace</strong>, the former Irish rugby international and British & Irish Lion. If you\'d like to reach the board, drop a line to <strong>info@crosscharity.ie</strong>.',
+        'Our board is led by <strong>James O\'Connor</strong> as Chair, with <strong>Professor John Reynolds</strong> representing Trinity and St. James\'s. The Headon family are deeply involved \u2014 <strong>Conor</strong> co-founded CROSS back in 2004, while <strong>Sean</strong> and <strong>Patrick</strong> also serve on the board (Sean and Patrick also run Headon Boxing Academy, which has been an incredible fundraising partner). Rounding out the team are <strong>Tom Conachy</strong>, <strong>Ben English</strong>, and <strong>Philip Smith</strong>. Our patron is rugby legend <strong>Paul Wallace</strong>. You can reach the team at <strong>info@crosscharity.ie</strong>.',
+        'We\'re fortunate to have an amazing team driving Friends of CROSS. Chair <strong>James O\'Connor</strong> leads the board alongside <strong>Professor John Reynolds</strong> (a world-renowned surgical oncologist), <strong>Conor, Sean, and Patrick Headon</strong>, <strong>Tom Conachy</strong>, <strong>Ben English</strong>, and <strong>Philip Smith</strong>. CROSS was co-founded in 2004 by Conor Headon and Ronan Murphy, and our patron since 2011 is <strong>Paul Wallace</strong>, one of three Wallace brothers in the Guinness Book of Records for all playing for the British & Irish Lions. To get in touch with any of them, email <strong>info@crosscharity.ie</strong>.'
       ],
-      followUp: 'Would you like to know more about the research team at Trinity, or perhaps about our patron Paul Wallace and the incredible cycling fundraisers he\'s led?'
+      followUp: 'Would you like to know more about the research team at Trinity, or about our patron Paul Wallace? You can also reach the board directly at info@crosscharity.ie.'
     },
 
     contact: {
@@ -350,7 +364,7 @@ document.addEventListener('DOMContentLoaded', function () {
       responses: [
         'We\'d love to partner with your organisation! Corporate sponsorship with CROSS is a fantastic opportunity \u2014 you can support life-saving research while bringing your team together for memorable events. Past partners include <strong>Uniphar PLC</strong> (whose Unity for Hope campaign raised \u20AC110,000 with matched funding) and <strong>Viviscal</strong>. Opportunities range from sponsoring our Boxing Nights and Golf Classic to bespoke partnership arrangements. <a href="#contact" style="color: var(--color-accent); font-weight: 600;">Get in touch</a> to explore the possibilities!',
         'Corporate partnerships are incredibly valuable to CROSS. <strong>Uniphar PLC</strong> has been a fantastic partner \u2014 their staff campaign raised significant funds which the company matched, contributing over \u20AC110,000. We offer sponsorship opportunities across our events (Boxing Nights, Golf Classic, Carol Concert) and are always open to creative collaborations. It\'s a wonderful way to align your brand with a meaningful cause. <a href="#contact" style="color: var(--color-accent); font-weight: 600;">Let\'s chat about how we can work together</a>.',
-        'Absolutely! We\'re always delighted to work with businesses who want to make a difference. Whether it\'s event sponsorship, team fundraising challenges, or something completely new, we\'ll make it work. Companies like Uniphar and Viviscal have been incredible supporters over the years. <a href="#contact" style="color: var(--color-accent); font-weight: 600;">Contact us</a> and we\'ll tailor something that works for both of us.'
+        'We\'re always delighted to work with businesses who want to make a difference. Whether it\'s event sponsorship, team fundraising challenges, or something completely new, we\'ll make it work. Companies like Uniphar and Viviscal have been incredible supporters over the years. <a href="#contact" style="color: var(--color-accent); font-weight: 600;">Contact us at info@crosscharity.ie</a> and we\'ll tailor something that works for both of us.'
       ],
       followUp: 'Would you like to hear about specific sponsorship packages, or shall I connect you with the team to discuss a custom partnership?'
     },
@@ -390,8 +404,8 @@ document.addEventListener('DOMContentLoaded', function () {
         keywords: ['stripe', 'payment', 'secure', 'safe', 'card', 'security', 'process']
       },
       responses: [
-        'Absolutely \u2014 your security is our top priority! We use <strong>Stripe</strong> for all payment processing, which is one of the world\'s most trusted and secure platforms. Your card details are encrypted and never stored on our servers. Friends of CROSS is also a registered charity (No. 15364), so you can donate with complete confidence. <a href="#donate" style="color: var(--color-accent); font-weight: 600;">Ready to donate?</a>',
-        'Great question! We process all donations through <strong>Stripe</strong>, which handles payments for companies like Amazon and Google, so your details are in very safe hands. Everything is encrypted end-to-end, and we never see or store your card information. As a registered Irish charity (No. 15364), transparency and trust are central to everything we do.',
+        'Your security is our top priority. We use <strong>Stripe</strong> for all payment processing, which is one of the world\'s most trusted and secure platforms. Your card details are encrypted and never stored on our servers. Friends of CROSS is also a registered charity (No. 15364), so you can donate with complete confidence. <a href="#donate" style="color: var(--color-accent); font-weight: 600;">Ready to donate?</a>',
+        'We process all donations through <strong>Stripe</strong>, which handles payments for companies like Amazon and Google, so your details are in very safe hands. Everything is encrypted end-to-end, and we never see or store your card information. As a registered Irish charity (No. 15364), transparency and trust are central to everything we do.',
         'Your donation is processed securely through <strong>Stripe</strong> \u2014 a world-leading payment platform trusted by millions of businesses globally. Your personal and financial data is fully encrypted and protected. And because we have zero administrative costs, you can rest assured that every cent of your donation goes directly to cancer research.'
       ],
       followUp: 'Would you like to go ahead and make a donation, or do you have any other questions about the process?'
@@ -421,7 +435,23 @@ document.addEventListener('DOMContentLoaded', function () {
   var SCORE_KEYWORD = 1;
   var MIN_THRESHOLD = 2;
 
+  // Combined-intent detection: check if both contact and board signals co-exist
+  var contactSignals = ['contact', 'reach', 'email', 'speak to', 'talk to', 'get in touch', 'phone'];
+  var boardSignals = ['board', 'member', 'chair', 'leadership', 'team', 'james', 'john', 'sean', 'conor', 'patrick', 'tom', 'ben', 'philip', 'wallace', 'reynolds', 'headon', 'patron'];
+
+  function hasOverlap(cleaned, signals) {
+    for (var i = 0; i < signals.length; i++) {
+      if (cleaned.indexOf(signals[i]) !== -1) return true;
+    }
+    return false;
+  }
+
   function classifyIntent(cleaned) {
+    // Pre-check: if both contact and board signals present, route to contact_board
+    if (hasOverlap(cleaned, contactSignals) && hasOverlap(cleaned, boardSignals)) {
+      return 'contact_board';
+    }
+
     var bestIntent = null;
     var bestScore = 0;
     var words = cleaned.split(' ');
@@ -530,9 +560,9 @@ document.addEventListener('DOMContentLoaded', function () {
   // ========================================
 
   var unknownResponses = [
-    'That\'s a great question \u2014 I want to make sure you get the right answer rather than guess! Please reach out to the team directly at <strong>info@crosscharity.ie</strong> and they\'ll get back to you promptly.',
-    'Hmm, I\'m not 100% certain about that one, and I\'d rather connect you with someone who can give you a definitive answer. Drop a line to <strong>info@crosscharity.ie</strong> or use our <a href="#contact" style="color: var(--color-accent); font-weight: 600;">contact form</a> \u2014 the team are wonderful and always happy to help!',
-    'I appreciate the question! That\'s a bit outside what I can confidently answer, so let me point you to the team who\'ll know for sure. You can email <strong>info@crosscharity.ie</strong> or <a href="#contact" style="color: var(--color-accent); font-weight: 600;">send a message through our contact form</a>.'
+    'I don\'t have that one handy \u2014 please contact us at <strong>info@crosscharity.ie</strong> and we\'ll be happy to help!',
+    'I\'m not sure about that one, but the team can help \u2014 reach out to <strong>info@crosscharity.ie</strong> and they\'ll get back to you.',
+    'I don\'t have the answer to that right now \u2014 please email <strong>info@crosscharity.ie</strong> and someone will be in touch.'
   ];
   var unknownIndex = 0;
 
