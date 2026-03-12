@@ -248,7 +248,7 @@ h1, h2, h3, h4 {
 }
 
 .nav-logo img {
-  max-height: 50px;
+  max-height: 80px;
   width: auto;
 }
 
@@ -702,9 +702,15 @@ h1, h2, h3, h4 {
   transition: all var(--transition);
 }
 
+a.partner-tile {
+  text-decoration: none;
+  color: var(--color-primary);
+}
+
 .partner-tile:hover {
   border-color: var(--color-accent);
   box-shadow: var(--shadow-md);
+  color: var(--color-accent-dark);
 }
 
 /* ---- Events Section ---- */
@@ -978,6 +984,25 @@ h1, h2, h3, h4 {
   color: rgba(255,255,255,0.55) !important;
 }
 
+.donate-matching-note {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius-sm);
+}
+
+.donate-matching-note p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.75) !important;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.donate-matching-note strong {
+  color: rgba(255,255,255,0.95);
+}
+
 /* ---- Team Section ---- */
 .team {
   background: var(--color-white);
@@ -1127,7 +1152,7 @@ h1, h2, h3, h4 {
 }
 
 .footer-logo img {
-  max-height: 80px;
+  max-height: 120px;
   width: auto;
   padding: 0.5rem 0.75rem;
   background: var(--color-white);
@@ -1548,6 +1573,10 @@ h1, h2, h3, h4 {
 
   .nav-toggle.open span:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  .nav-logo img {
+    max-height: 60px;
   }
 
   .nav-donate-btn {
