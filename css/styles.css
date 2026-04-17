@@ -621,6 +621,7 @@ h2 { font-weight: 600; }
   aspect-ratio: 1;
   border-radius: 50%;
   object-fit: cover;
+  object-position: center top;
   margin: 0 auto;
   display: block;
   box-shadow: 0 8px 24px rgba(28,43,53,0.12);
