@@ -845,6 +845,22 @@ a.partner-tile {
   color: var(--color-accent-dark);
 }
 
+.partner-tile--logo {
+  padding: 0.5rem 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+}
+
+.partner-tile--logo img {
+  height: 36px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  display: block;
+}
+
 /* ---- Testimonials Section ---- */
 .testimonials {
   background: var(--color-bg-warm);
