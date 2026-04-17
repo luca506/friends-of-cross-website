@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- ========== NAVIGATION ========== -->
@@ -228,25 +228,53 @@
       </div>
       <p class="section-intro">Friends of CROSS run a range of inclusive and engaging events throughout the year, offering everyone an opportunity to support our mission.</p>
 
-      <p class="section-intro" style="margin-top:0; color: var(--text-light);">No upcoming events are scheduled at the moment — check back soon or <a href="#contact" style="color:var(--primary);">get in touch</a> to find out what's coming next.</p>
+      <h3 class="events-subheading">Upcoming Events</h3>
+      <div class="events-grid events-grid--upcoming">
+        <div class="event-card event-card--upcoming featured">
+          <div class="event-date">
+            <span class="event-month">NOV</span>
+            <span class="event-day">2027</span>
+          </div>
+          <div class="event-info">
+            <h4>Friends of CROSS Rugby Lunch 2027</h4>
+            <p>Save the date — our next Rugby Lunch fundraiser is coming in November 2027. Details to be confirmed. Get in touch to register your interest.</p>
+            <a href="#contact" class="card-link">Register Interest &rarr;</a>
+          </div>
+        </div>
+      </div>
 
       <div class="events-cta">
         <p>There are also ample opportunities to arrange your own events to support our work.</p>
         <a href="#get-involved" class="btn btn-primary">Get Involved</a>
       </div>
 
+      <h3 class="events-subheading">Past Events</h3>
+      <div class="events-grid events-grid--past">
+        <div class="event-card event-card--past">
+          <img class="event-photo" src="images/rugby-lunch-2025.jpg" alt="Friends of CROSS Rugby Lunch 2025 at the InterContinental Hotel, Dublin" loading="lazy">
+          <div class="event-body">
+            <div class="event-header-row">
+              <div class="event-date">
+                <span class="event-month">NOV</span>
+                <span class="event-day">2025</span>
+              </div>
+              <h4>Friends of CROSS Rugby Lunch 2025</h4>
+            </div>
+            <p>A rugby-themed fundraising lunch at the InterContinental Hotel, Dublin, hosted by comedian Mario Rosenstock with special guests from the world of international rugby. Over €50,000 was raised — funding a Cell InnoCyte Machine that allows our cancer research team to track cancer cell behaviour, migration, and response to therapies in real time, directly helping to improve outcomes for cancer patients.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="events-subheading">Fundraising in Action</h3>
       <div class="event-gallery">
-        <div class="image-placeholder gallery-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-          <span>Fundraising Photo 1</span>
+        <div class="gallery-img">
+          <img src="images/fundraising-1.jpg" alt="Friends of CROSS fundraising event" loading="lazy">
         </div>
-        <div class="image-placeholder gallery-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-          <span>Fundraising Photo 2</span>
+        <div class="gallery-img">
+          <img src="images/fundraising-2.jpg" alt="Friends of CROSS fundraising event" loading="lazy">
         </div>
-        <div class="image-placeholder gallery-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-          <span>Fundraising Photo 3</span>
+        <div class="gallery-img">
+          <img src="images/rugby-lunch-2025.jpg" alt="Friends of CROSS Rugby Lunch 2025" loading="lazy">
         </div>
       </div>
     </div>
@@ -398,24 +426,21 @@
       <div class="team-grid">
         <div class="team-card">
           <div class="team-photo">
-            <div class="image-placeholder avatar">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            </div>
+            <img class="avatar" src="images/committee/james-oconnor.jpg" alt="James O'Connor" loading="lazy">
           </div>
           <h4>James O'Connor</h4>
           <span class="team-role">Chair</span>
         </div>
         <div class="team-card">
           <div class="team-photo">
-            <div class="image-placeholder avatar">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            </div>
+            <img class="avatar" src="images/committee/prof-john-reynolds.jpg" alt="Professor John Reynolds" loading="lazy">
           </div>
           <h4>Professor John Reynolds</h4>
           <span class="team-role">Trinity &amp; St James' Rep</span>
         </div>
         <div class="team-card">
           <div class="team-photo">
+            <!-- TODO: Add photo -->
             <div class="image-placeholder avatar">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
@@ -425,6 +450,7 @@
         </div>
         <div class="team-card">
           <div class="team-photo">
+            <!-- TODO: Add photo -->
             <div class="image-placeholder avatar">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
@@ -434,6 +460,7 @@
         </div>
         <div class="team-card">
           <div class="team-photo">
+            <!-- TODO: Add photo -->
             <div class="image-placeholder avatar">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
@@ -443,24 +470,21 @@
         </div>
         <div class="team-card">
           <div class="team-photo">
-            <div class="image-placeholder avatar">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            </div>
+            <img class="avatar" src="images/committee/jacqueline-rafter.jpg" alt="Jacqueline Rafter" loading="lazy">
           </div>
           <h4>Jacqueline Rafter</h4>
           <span class="team-role">Committee Member</span>
         </div>
         <div class="team-card">
           <div class="team-photo">
-            <div class="image-placeholder avatar">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            </div>
+            <img class="avatar" src="images/committee/luca-mariotti.png" alt="Luca Mariotti" loading="lazy">
           </div>
           <h4>Luca Mariotti</h4>
           <span class="team-role">Committee Member</span>
         </div>
         <div class="team-card">
           <div class="team-photo">
+            <!-- TODO: Add photo -->
             <div class="image-placeholder avatar">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
@@ -470,6 +494,7 @@
         </div>
         <div class="team-card">
           <div class="team-photo">
+            <!-- TODO: Add photo -->
             <div class="image-placeholder avatar">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
@@ -479,9 +504,7 @@
         </div>
         <div class="team-card">
           <div class="team-photo">
-            <div class="image-placeholder avatar">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            </div>
+            <img class="avatar" src="images/committee/jacintha-osullivan.jpg" alt="Jacintha O'Sullivan" loading="lazy">
           </div>
           <h4>Jacintha O'Sullivan</h4>
           <span class="team-role">Committee Member</span>
