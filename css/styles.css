@@ -68,6 +68,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden;
 }
 
 body {
@@ -77,6 +78,7 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 img {
@@ -1949,6 +1951,25 @@ a.partner-tile {
     --section-padding: 4rem 0;
   }
 
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .section {
+    overflow: hidden;
+  }
+
   .nav-links {
     display: none;
     position: absolute;
@@ -1992,19 +2013,52 @@ a.partner-tile {
 
   .hero-content {
     padding: 5rem 1.25rem 3rem;
-    max-width: 100%;
+    max-width: 100vw;
+    width: 100%;
     box-sizing: border-box;
-    overflow: hidden;
   }
 
   .hero-content h1 {
     font-size: clamp(1.6rem, 6vw, 2.4rem);
     word-break: break-word;
     overflow-wrap: break-word;
+    white-space: normal;
   }
 
   .hero-content p {
     font-size: 0.95rem;
+  }
+
+  .hero-banner-wrapper {
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  .hero-event-banner {
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .hero-banner-dates {
+    white-space: normal;
+    text-align: center;
+    font-size: 0.65rem;
+  }
+
+  .hero-banner-dot {
+    display: none;
+  }
+
+  .hero-banner-link {
+    white-space: nowrap;
+  }
+
+  .equipment-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .events-grid {
+    grid-template-columns: 1fr;
   }
 
   .donation-widget {
@@ -2176,14 +2230,4 @@ a.partner-tile {
 .hero-banner-link:hover {
   color: var(--color-accent);
   border-color: var(--color-accent);
-}
-
-@media (max-width: 768px) {
-  .hero-banner-dates {
-    white-space: normal;
-    text-align: center;
-  }
-  .hero-banner-dot {
-    display: none;
-  }
 }
