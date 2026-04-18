@@ -641,6 +641,7 @@ h2 { font-weight: 600; }
   padding: 3rem;
   text-align: center;
   border: 1px solid var(--color-border);
+  margin-top: 4rem;
 }
 
 .friends-subsection h3 {
@@ -775,6 +776,12 @@ h2 { font-weight: 600; }
   transition: all var(--transition);
   display: flex;
   flex-direction: column;
+}
+
+.equipment-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  max-width: 50%;
+  margin: 0 auto;
 }
 
 .equipment-card:hover {
