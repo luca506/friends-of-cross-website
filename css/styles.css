@@ -850,13 +850,13 @@ a.partner-tile {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 52px;
+  min-height: 66px;
 }
 
 .partner-tile--logo img {
-  height: 36px;
+  max-height: 50px;
   width: auto;
-  max-width: 160px;
+  max-width: 180px;
   object-fit: contain;
   display: block;
 }
