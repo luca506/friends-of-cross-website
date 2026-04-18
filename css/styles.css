@@ -641,7 +641,7 @@ h2 { font-weight: 600; }
   padding: 3rem;
   text-align: center;
   border: 1px solid var(--color-border);
-  margin-top: 4rem;
+  margin-top: 3rem;
 }
 
 .friends-subsection h3 {
@@ -765,6 +765,7 @@ h2 { font-weight: 600; }
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
+  padding-bottom: 3rem;
 }
 
 .equipment-card {
@@ -2118,75 +2119,67 @@ a.partner-tile {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(28, 43, 53, 0.92);
-  backdrop-filter: blur(4px);
-  padding: 0.75rem 2rem;
+  background: rgba(91, 181, 213, 0.15);
+  border-top: 1px solid rgba(91, 181, 213, 0.4);
+  padding: 0.6rem 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.25rem;
+  gap: 1rem;
   flex-wrap: wrap;
-  border-top: 1px solid rgba(91,181,213,0.3);
   z-index: 3;
 }
 
-.hero-event-banner h5 {
+.hero-banner-label {
   color: var(--color-accent);
-  font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  margin: 0;
   white-space: nowrap;
 }
 
-.hero-event-banner p {
-  color: rgba(255,255,255,0.85);
+.hero-banner-divider {
+  color: rgba(255,255,255,0.25);
   font-size: 0.8rem;
-  margin: 0;
 }
 
-.hero-event-banner-links {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.hero-event-banner-links a {
-  padding: 0.35rem 1rem;
-  border: 1.5px solid rgba(255,255,255,0.6);
-  border-radius: 50px;
-  color: white;
+.hero-banner-dates {
+  color: rgba(255,255,255,0.75);
   font-size: 0.75rem;
-  font-weight: 600;
-  text-decoration: none;
-  letter-spacing: 0.04em;
-  transition: all 0.2s ease;
+  letter-spacing: 0.02em;
   white-space: nowrap;
 }
 
-.hero-event-banner-links a:hover {
-  background: var(--color-accent);
+.hero-banner-links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.hero-banner-links a {
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.4);
+  padding-bottom: 1px;
+  transition: border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.hero-banner-links a:hover {
+  color: var(--color-accent);
   border-color: var(--color-accent);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .hero-event-banner {
     flex-direction: column;
+    gap: 0.4rem;
     text-align: center;
-    gap: 0.5rem;
     padding: 0.75rem 1rem;
   }
-  .hero-event-banner h5 {
-    white-space: normal;
-  }
-  .hero-event-banner-links {
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-  .hero-event-banner-links a {
-    width: auto;
-  }
+  .hero-banner-divider { display: none; }
+  .hero-banner-dates { white-space: normal; }
 }
