@@ -641,7 +641,7 @@ h2 { font-weight: 600; }
   padding: 3rem;
   text-align: center;
   border: 1px solid var(--color-border);
-  margin-top: 3rem;
+  margin-top: 4rem;
 }
 
 .friends-subsection h3 {
@@ -766,6 +766,7 @@ h2 { font-weight: 600; }
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
   padding-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .equipment-card {
@@ -2121,65 +2122,46 @@ a.partner-tile {
   right: 0;
   background: rgba(91, 181, 213, 0.15);
   border-top: 1px solid rgba(91, 181, 213, 0.4);
-  padding: 0.6rem 2rem;
+  padding: 0.5rem 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  z-index: 3;
+  gap: 1.5rem;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  height: 36px;
 }
-
 .hero-banner-label {
   color: var(--color-accent);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   white-space: nowrap;
 }
-
 .hero-banner-divider {
   color: rgba(255,255,255,0.25);
-  font-size: 0.8rem;
 }
-
 .hero-banner-dates {
   color: rgba(255,255,255,0.75);
-  font-size: 0.75rem;
-  letter-spacing: 0.02em;
+  font-size: 0.72rem;
   white-space: nowrap;
 }
-
 .hero-banner-links {
   display: flex;
-  gap: 0.75rem;
+  gap: 1rem;
 }
-
 .hero-banner-links a {
   color: white;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
   text-decoration: none;
   border-bottom: 1px solid rgba(255,255,255,0.4);
   padding-bottom: 1px;
-  transition: border-color 0.2s, color 0.2s;
   white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
 }
-
 .hero-banner-links a:hover {
   color: var(--color-accent);
   border-color: var(--color-accent);
-}
-
-@media (max-width: 768px) {
-  .hero-event-banner {
-    flex-direction: column;
-    gap: 0.4rem;
-    text-align: center;
-    padding: 0.75rem 1rem;
-  }
-  .hero-banner-divider { display: none; }
-  .hero-banner-dates { white-space: normal; }
 }
