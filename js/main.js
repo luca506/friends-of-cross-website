@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Configure WORKER_URL to your deployed Worker endpoint.
   // ========================================
 
-  var WORKER_URL = 'YOUR_WORKER_URL';
+  var WORKER_URL = 'https://hope-chatbot.lucatmariotti.workers.dev';
 
   async function findAnswer(userMessage) {
     try {
