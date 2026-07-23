@@ -924,6 +924,13 @@ a.partner-tile {
   background: linear-gradient(135deg, rgba(91,181,213,0.06), rgba(91,181,213,0.02));
 }
 
+.event-provisional {
+  font-size: 0.75rem;
+  color: var(--color-accent);
+  font-weight: 400;
+  font-style: italic;
+}
+
 .event-card--upcoming {
   padding: 2.25rem;
   align-items: flex-start;
