@@ -446,104 +446,13 @@ h2 { font-weight: 600; }
   flex-wrap: wrap;
 }
 
-/* ---- Donation Widget (Fixed Top Right) ---- */
-.donation-widget {
-  position: fixed;
-  top: 104px;
-  right: 1.5rem;
-  z-index: 999;
-  width: 240px;
-  background: var(--color-white);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  overflow: hidden;
-  transition: all var(--transition);
-  opacity: 0;
-  transform: translateY(-10px);
-  pointer-events: none;
-}
-
-.donation-widget.visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.donation-widget-header {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1rem;
-  background: var(--color-accent);
-  color: var(--color-white);
-  font-weight: 600;
-  font-size: 0.85rem;
-}
-
-.donation-widget-icon {
-  display: flex;
-}
-
-.donation-widget-body {
-  padding: 1rem;
-}
-
-.donation-amounts {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
-}
-
-.amount-btn {
-  padding: 0.5rem;
-  border: 1.5px solid var(--color-border);
-  background: var(--color-white);
-  border-radius: var(--radius-sm);
-  font-weight: 600;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: all var(--transition);
-  color: var(--color-text);
-}
-
-.amount-btn:hover,
-.amount-btn.active {
-  border-color: var(--color-accent);
-  background: rgba(91,181,213,0.08);
-  color: var(--color-accent-dark);
-}
-
-.custom-amount {
-  display: flex;
-  align-items: center;
-  border: 1.5px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  padding: 0 0.5rem;
-  margin-bottom: 0.75rem;
-}
-
-.currency-symbol {
-  font-weight: 600;
-  color: var(--color-text-light);
-  font-size: 0.9rem;
-}
-
-.custom-amount input {
-  flex: 1;
-  border: none;
-  outline: none;
-  padding: 0.5rem;
-  font-size: 0.85rem;
-  font-family: var(--font-body);
-  background: transparent;
-}
-
-.btn-donate-widget {
-  width: 100%;
-  justify-content: center;
-  padding: 0.65rem;
-  font-size: 0.85rem;
+/* ---- Stripe Donate CTA ---- */
+.btn-donate-stripe {
+  padding: 1.2rem 3rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin: 0.5rem 0 1rem;
 }
 
 /* ---- About Section ---- */
@@ -2059,10 +1968,6 @@ a.partner-tile {
 
   .events-grid {
     grid-template-columns: 1fr;
-  }
-
-  .donation-widget {
-    display: none;
   }
 
   .about-grid {
